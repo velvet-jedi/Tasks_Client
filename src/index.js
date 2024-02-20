@@ -16,6 +16,25 @@ const heading = document.createElement('h1');
 heading.textContent = 'Tasks';
 header.appendChild(heading);
 
+const tabs = document.createElement('div');
+tabs.classList.add('tabs');
+
+const favBtn = document.createElement('button');
+favBtn.setAttribute('id', "favBtn");
+favBtn.innerHTML = `<img class="icon" src="./Icons/star_filled.png"></img>`;
+tabs.appendChild(favBtn);
+
+const myTasksBtn = document.createElement('button');
+myTasksBtn.textContent = 'My Tasks';
+tabs.appendChild(myTasksBtn);
+
+const headerNewTaskBtn = document.createElement('button');
+headerNewTaskBtn.setAttribute('id', "headerNewTask");
+headerNewTaskBtn.innerHTML = `<img src="./Icons/add.png">New list</img>`;
+tabs.appendChild(headerNewTaskBtn);
+
+header.appendChild(tabs);
+
 // footer inital DOM
 const group1 = document.createElement('div');
 group1.classList.add('group1');
@@ -43,3 +62,12 @@ footer.appendChild(footerNewTaskBtn);
 
 
 
+// slide and swipe functionality
+// let currentTab = 0;
+
+// function swipe() {
+//     const tabContents = document.querySelector('#content');
+//     tabContents.forEach(() => {
+        
+//     });
+// }
