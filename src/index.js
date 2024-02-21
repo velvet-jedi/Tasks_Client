@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // dynamic import at runtime
 const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);
+const images = require.context('./Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
 
 
 const header = document.getElementById('header');
@@ -33,7 +34,8 @@ const tabs = `
 const panels = `
 <div class="tab-panels">
     <div id="tabPanel-1" role="tabpanel" aria-labelled-by="tab-1" tabindex="0">
-        <p>you'll get there</p>
+        <img src="./Icons/man-hold-star.png"></img>
+        <p>Mark important tasks with a star so you can easily find them here</p>
     </div>
 
     <div id="tabPanel-2" hidden role="tabpanel" aria-labelled-by="tab-2" tabindex="0">
