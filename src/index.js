@@ -39,7 +39,8 @@ const panels = `
     </div>
 
     <div id="tabPanel-2" hidden role="tabpanel" aria-labelled-by="tab-2" tabindex="0">
-        <p>Keep trying</p>
+        <img src="./Icons/idle.png" height="500">
+        <p>No todos! You're kinda idle</p>
     </div>
 
     <div id="tabPanel-3" hidden role="tabpanel" aria-labelled-by="tab-3" tabindex="0">
