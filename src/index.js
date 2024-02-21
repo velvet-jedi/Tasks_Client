@@ -21,7 +21,7 @@ header.appendChild(heading);
 const tabs = `
 <div role="tablist" aria-labelledby="channel-name">
     <button id="tab-1" role="tab" aria-controls="tabPanel-1" aria-selected="true" tabindex="0">
-        <img src="./Icons/star_filled.png">
+        <img src="./Icons/star_filled.png"></img>   
     </button>
     <button id="tab-2" role="tab" aria-controls="tabPanel-2" aria-selected="false" tabindex="-1">
         My Tasks
@@ -69,6 +69,7 @@ tabsContainer.addEventListener("click", (e) => {
 
 function switchTab (newTab) {
     
+    const oldTab = tabsContainer.querySelector('[aria-selected="true"]');
     // Get the ID of the panel
     const activePanelId = newTab.getAttribute("aria-controls");
 
@@ -89,33 +90,34 @@ function switchTab (newTab) {
     newTab.setAttribute("aria-selected", true);
     newTab.setAttribute("tabindex", "0");
     newTab.focus();
+    moveIndicator(oldTab, newTab);
 }
 
-// const tabs = document.createElement('div');
-// tabs.classList.add('tabs');
+function moveIndicator(oldTab, newTab) {
+    const newTabPosition = oldTab.compareDocumentPosition(newTab);  // get the direction of movement
+    //offsetWidth read-only property returns the layout width of an element as an integer.
+    const newTabWidth = newTab.offsetWidth / tabsContainer.offsetWidth;
+    // console.log(tabsContainer.offsetWidth);
+    // console.log(newTab.offsetWidth);
+    // console.log(newTabWidth);
+    let transitionWidth;
+    // stretchy
+    if(newTabPosition === 4) {
+        transitionWidth = newTab.offsetLeft + newTab.offsetWidth - oldTab.offsetLeft;
+    }   else {
+        transitionWidth = oldTab.offsetLeft + oldTab.offsetWidth - newTab.offsetLeft;
+        tabsContainer.style.setProperty("--_left", newTab.offsetLeft + "px");
+    }
+    
+    tabsContainer.style.setProperty('--_width', transitionWidth / tabsContainer.offsetWidth);
 
-// const favBtn = document.createElement('button');
-// favBtn.setAttribute('id', "favBtn");
-// favBtn.innerHTML = `<img class="icon" src="./Icons/star_filled.png"></img>`;
-// tabs.appendChild(favBtn);
+    setTimeout(() => {
+        tabsContainer.style.setProperty("--_left", newTab.offsetLeft + "px");
+        tabsContainer.style.setProperty('--_width', newTabWidth); 
+    }, 200);
 
-// const myTasksBtn = document.createElement('button');
-// myTasksBtn.textContent = 'My Tasks';
-// myTasksBtn.setAttribute('id', "myTasksBtn");
-// tabs.appendChild(myTasksBtn);
-
-// const headerNewTaskBtn = document.createElement('button');
-// headerNewTaskBtn.setAttribute('id', "headerNewTask");
-// headerNewTaskBtn.innerHTML = `<img src="./Icons/add.png">New list</img>`;
-// tabs.appendChild(headerNewTaskBtn);
-
-// header.appendChild(tabs);
-
-// --------------------------------------------------------
-
-
-
-
+}
+// ---------------------------------------------------------------------------------------------------------------------
 // footer inital DOM
 const group1 = document.createElement('div');
 group1.classList.add('group1');

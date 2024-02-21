@@ -39,24 +39,25 @@ h1 {
     justify-content: center;
     align-items: center;
     width: fit-content;
+    position: relative;
     margin-left: 3.5%;
-    border-bottom: 10px solid hsl(0 0% 100% / 0.5);
+    border-bottom: 1px solid hsl(0 0% 30%);
 }
 [role="tablist"]::after {
     content: "";
-    position:fixed ;
-    background: gray;
+    position:absolute ;
+    background: white;
     opacity: 0.8;
-    height: 3px;
-    width: 100%;
+    height: 4px;
     
-    translate: var(--_left) 0;
-    scale: var(--_width) 1;
-    top: 15%;
-    /* bottom: 0; */
+    /* custom CSS properties (variables) for values of scale and translate props */
+    scale: var(--_width, 0.190) 1;
+    translate: var(--_left, 0px) 0;
+        
+    bottom: 0;
     left: 0;
-
-    transition: translate 250ms ease-in-out, scale 250ms ease-in-out;
+    right: 0;
+    transition: scale 200ms, translate 200ms;
     transform-origin: left;
 }
 [role="tab"] {
