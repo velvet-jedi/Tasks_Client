@@ -35,7 +35,10 @@ header {
     align-items: center;
     padding-bottom: 0;
 }
-
+h1 {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
 #headerNewTask {
     display: flex;
     text-align: center;
@@ -59,7 +62,7 @@ header {
     margin-left: 10px;
     position: relative;
     width: auto;
-    
+    margin-top: 0px;
 }
 .tabs button {
     border: none;
