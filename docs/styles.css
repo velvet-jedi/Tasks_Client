@@ -59,6 +59,7 @@ header {
     margin-left: 10px;
     position: relative;
     width: auto;
+    
 }
 .tabs button {
     border: none;
@@ -129,4 +130,9 @@ footer {
 #add-task {
     background-color: transparent;
     font-size: 2.5rem;
+}
+#myTasksBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

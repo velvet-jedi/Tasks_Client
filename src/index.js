@@ -26,6 +26,7 @@ tabs.appendChild(favBtn);
 
 const myTasksBtn = document.createElement('button');
 myTasksBtn.textContent = 'My Tasks';
+myTasksBtn.setAttribute('id', "myTasksBtn");
 tabs.appendChild(myTasksBtn);
 
 const headerNewTaskBtn = document.createElement('button');
@@ -35,9 +36,13 @@ tabs.appendChild(headerNewTaskBtn);
 
 header.appendChild(tabs);
 
+
+
 // footer inital DOM
 const group1 = document.createElement('div');
 group1.classList.add('group1');
+
+
 
 // footer buttons group1 on the left side
 const footerViewBtn = document.createElement('button');
@@ -62,12 +67,3 @@ footer.appendChild(footerNewTaskBtn);
 
 
 
-// slide and swipe functionality
-// let currentTab = 0;
-
-// function swipe() {
-//     const tabContents = document.querySelector('#content');
-//     tabContents.forEach(() => {
-        
-//     });
-// }
