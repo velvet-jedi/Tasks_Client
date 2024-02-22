@@ -27,7 +27,7 @@ const tabs = `
         My Tasks
     </button>
     <button id="tab-3" role="tab" aria-controls="tabPanel-3" aria-selected="false" tabindex="-1">
-    <img src="./Icons/add.png">New Item
+    <img src="./Icons/add.png">New List
     </button>
 </div>
 `
@@ -121,6 +121,10 @@ function moveIndicator(oldTab, newTab) {
 // footer inital DOM
 const group1 = document.createElement('div');
 group1.classList.add('group1');
+
+$("img").mousedown(function(){
+    return false;
+});
 
 
 
