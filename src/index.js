@@ -177,6 +177,16 @@ function showListOptionsModal() {
     modal.appendChild(deleteCompleted);
     
     document.body.appendChild(modal);
+
+    const allElements = document.querySelectorAll("*:not(body):not(html)");
+    allElements.forEach(element => {
+        if (!element.classList.contains("show") && !element.closest('.show')) {
+            element.style.filter = "blur(0.7px)"; 
+            
+        }
+        
+    });
+
 }
 
 })
