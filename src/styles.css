@@ -16,10 +16,13 @@
     padding: 0;
     font-family:  "tasksFont-regular";
     user-select: none;
+    
 }
 
 body {
     background-color: #192734;
+    height: 100vh;
+    overflow: hidden;
 }
 header {
     font-family:  "tasksFont-regular";
@@ -178,6 +181,7 @@ footer {
     }
     to {
         transform: translateY(18%);
+        bottom: 30px;
     }
 }
 .show {

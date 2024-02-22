@@ -61,7 +61,7 @@ tabsContainer.addEventListener("click", (e) => {
     const clickedTab = e.target.closest("button");
     const currentTab = tabsContainer.querySelector('[aria-selected="true"]');
 
-    if(!clickedTab || clickedTab === currentTab) return;
+    if(!clickedTab || clickedTab === currentTab || modal.classList.contains('show')) return;
 
     switchTab(clickedTab);
 });
