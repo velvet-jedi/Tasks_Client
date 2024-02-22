@@ -1,24 +1,24 @@
 import "./styles.css";
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-// dynamic import at runtime
-const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);
-const images = require.context('./Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
-
-
-const header = document.getElementById('header');
-// const content = document.getElementById('content');
-const footer = document.getElementById('footer');
+    // dynamic import at runtime
+    const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);
+    const images = require.context('./Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
 
 
+    const header = document.getElementById('header');
+    // const content = document.getElementById('content');
+    const footer = document.getElementById('footer');
 
-// header part initial DOM
-const heading = document.createElement('h1');
-heading.textContent = 'Tasks';
-header.appendChild(heading);
 
-// --------------------------------------------------------
-const tabs = `
+
+    // header part initial DOM
+    const heading = document.createElement('h1');
+    heading.textContent = 'Tasks';
+    header.appendChild(heading);
+
+    // --------------------------------------------------------
+    const tabs = `
 <div role="tablist" aria-labelledby="channel-name">
     <button id="tab-1" role="tab" aria-controls="tabPanel-1" aria-selected="true" tabindex="0">
         <img src="./Icons/star_filled.png"></img>   
@@ -31,160 +31,198 @@ const tabs = `
     </button>
 </div>
 `
-const panels = `
+    const panels = `
 <div class="tab-panels">
-    <div id="tabPanel-1" role="tabpanel" aria-labelled-by="tab-1" tabindex="0">
+    <div id="tabPanel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
         <img src="./Icons/man-hold-star.png"></img>
         <p>Mark important tasks with a star so you can easily find them here</p>
     </div>
 
-    <div id="tabPanel-2" hidden role="tabpanel" aria-labelled-by="tab-2" tabindex="0">
+    <div id="tabPanel-2" hidden role="tabpanel" aria-labelledby="tab-2" tabindex="0">
         <img src="./Icons/idle.png" height="500">
         <p>No todos! You're kinda idle</p>
     </div>
 
-    <div id="tabPanel-3" hidden role="tabpanel" aria-labelled-by="tab-3" tabindex="0">
+    <div id="tabPanel-3" hidden role="tabpanel" aria-labelledby="tab-3" tabindex="0">
         <p>Make it better</p>
     </div>
 </div>
 `
 
-header.insertAdjacentHTML('beforeend', tabs);
-header.insertAdjacentHTML('beforeend', panels);
+    header.insertAdjacentHTML('beforeend', tabs);
+    header.insertAdjacentHTML('beforeend', panels);
 
-const tabsContainer = document.querySelector("[role=tablist]");
-const tabButtons = document.querySelectorAll("[role=tab]");
-const tabPanels = document.querySelectorAll("[role=tabpanel]");
+    const tabsContainer = document.querySelector("[role=tablist]");
+    const tabButtons = document.querySelectorAll("[role=tab]");
+    const tabPanels = document.querySelectorAll("[role=tabpanel]");
 
-tabsContainer.addEventListener("click", (e) => {
+    tabsContainer.addEventListener("click", (e) => {
 
-    const clickedTab = e.target.closest("button");
-    const currentTab = tabsContainer.querySelector('[aria-selected="true"]');
+        const clickedTab = e.target.closest("button");
+        const currentTab = tabsContainer.querySelector('[aria-selected="true"]');
 
-    if(!clickedTab || clickedTab === currentTab || modal.classList.contains('show')) return;
+        if (!clickedTab || clickedTab === currentTab || modal.classList.contains('show')) return;
 
-    switchTab(clickedTab);
-});
-
-
-function switchTab (newTab) {
-    
-    const oldTab = tabsContainer.querySelector('[aria-selected="true"]');
-    // Get the ID of the panel
-    const activePanelId = newTab.getAttribute("aria-controls");
-
-    const activePanel = tabsContainer.nextElementSibling.querySelector(
-        "#" + CSS.escape(activePanelId)
-    );
-    tabButtons.forEach((button) => {
-        button.setAttribute("aria-selected", false);
-        button.setAttribute("tabindex", "-1");
+        switchTab(clickedTab);
     });
 
-    tabPanels.forEach((panel) => {
-        panel.setAttribute("hidden", true);
-    });
 
-    activePanel.removeAttribute("hidden", false);
+    function switchTab(newTab) {
 
-    newTab.setAttribute("aria-selected", true);
-    newTab.setAttribute("tabindex", "0");
-    newTab.focus();
-    moveIndicator(oldTab, newTab);
-}
+        const oldTab = tabsContainer.querySelector('[aria-selected="true"]');
+        // Get the ID of the panel
+        const activePanelId = newTab.getAttribute("aria-controls");
 
-function moveIndicator(oldTab, newTab) {
-    const newTabPosition = oldTab.compareDocumentPosition(newTab);  // get the direction of movement
-    //offsetWidth read-only property returns the layout width of an element as an integer.
-    const newTabWidth = newTab.offsetWidth / tabsContainer.offsetWidth;
-    // console.log(tabsContainer.offsetWidth);
-    // console.log(newTab.offsetWidth);
-    // console.log(newTabWidth);
-    let transitionWidth;
-    // stretchy
-    if(newTabPosition === 4) {
-        transitionWidth = newTab.offsetLeft + newTab.offsetWidth - oldTab.offsetLeft;
-    }   else {
-        transitionWidth = oldTab.offsetLeft + oldTab.offsetWidth - newTab.offsetLeft;
-        tabsContainer.style.setProperty("--_left", newTab.offsetLeft + "px");
+        const activePanel = tabsContainer.nextElementSibling.querySelector(
+            "#" + CSS.escape(activePanelId)
+        );
+        tabButtons.forEach((button) => {
+            button.setAttribute("aria-selected", false);
+            button.setAttribute("tabindex", "-1");
+        });
+
+        tabPanels.forEach((panel) => {
+            panel.setAttribute("hidden", true);
+        });
+
+        activePanel.removeAttribute("hidden", false);
+
+        newTab.setAttribute("aria-selected", true);
+        newTab.setAttribute("tabindex", "0");
+        newTab.focus();
+        moveIndicator(oldTab, newTab);
     }
-    
-    tabsContainer.style.setProperty('--_width', transitionWidth / tabsContainer.offsetWidth);
 
-    setTimeout(() => {
-        tabsContainer.style.setProperty("--_left", newTab.offsetLeft + "px");
-        tabsContainer.style.setProperty('--_width', newTabWidth); 
-    }, 200);
-
-}
-// ---------------------------------------------------------------------------------------------------------------------
-// footer inital DOM
-const group1 = document.createElement('div');
-group1.classList.add('group1');
-
-// disable image drag
-$("img").mousedown(function(){
-    return false;
-});
-
-
-
-// footer buttons group1 on the left side
-const footerViewBtn = document.createElement('button');
-footerViewBtn.innerHTML = '<img class="icon" src="./Icons/list.png" class="icon"></img>';
-
-const footerSortBtn = document.createElement('button');
-footerSortBtn.innerHTML = '<img class="icon" src="./Icons/sort.png"></img>';
-
-
-const footerOptionsBtn = document.createElement('button');
-footerOptionsBtn.innerHTML = '<img class="icon" src="./Icons/footer_options.png"></img>';
-
-group1.append(footerViewBtn, footerSortBtn, footerOptionsBtn);
-
-
-const footerNewTaskBtn = document.createElement('button');
-footerNewTaskBtn.classList.add('new-task');
-footerNewTaskBtn.innerHTML = `<p id="add-task">+</p>`;
-
-footer.append(group1);
-footer.appendChild(footerNewTaskBtn);
-
-// modals events
-
-footerOptionsBtn.addEventListener('click', () => {
-    showListOptionsModal();
-})
-
-// creating the modal
-const modal = document.createElement('div');
-modal.classList.add('listOpsModal');
-
-
-function showListOptionsModal() {
-    modal.classList.add('show');
-
-    const rename = document.createElement('button');
-    rename.innerHTML = `<p>Rename list</p>`;
-    modal.appendChild(rename);
-
-    const deleteList = document.createElement('button');
-    deleteList.innerHTML = `<p>Delete list</p>`;
-    modal.appendChild(deleteList);
-
-    const deleteCompleted = document.createElement('button');
-    deleteCompleted.innerHTML = `<p>Delete all completed tasks</p>`;
-    modal.appendChild(deleteCompleted);
-    
-    document.body.appendChild(modal);
-
-    const allElements = document.querySelectorAll("*:not(body):not(html)");
-    allElements.forEach(element => {
-        if (!element.classList.contains("show") && !element.closest('.show')) {
-            element.style.filter = "blur(0.7px)"; 
+    function moveIndicator(oldTab, newTab) {
+        const newTabPosition = oldTab.compareDocumentPosition(newTab);  // get the direction of movement
+        //offsetWidth read-only property returns the layout width of an element as an integer.
+        const newTabWidth = newTab.offsetWidth / tabsContainer.offsetWidth;
+        // console.log(tabsContainer.offsetWidth);
+        // console.log(newTab.offsetWidth);
+        // console.log(newTabWidth);
+        let transitionWidth;
+        // stretchy
+        if (newTabPosition === 4) {
+            transitionWidth = newTab.offsetLeft + newTab.offsetWidth - oldTab.offsetLeft;
+        } else {
+            transitionWidth = oldTab.offsetLeft + oldTab.offsetWidth - newTab.offsetLeft;
+            tabsContainer.style.setProperty("--_left", newTab.offsetLeft + "px");
         }
+
+        tabsContainer.style.setProperty('--_width', transitionWidth / tabsContainer.offsetWidth);
+
+        setTimeout(() => {
+            tabsContainer.style.setProperty("--_left", newTab.offsetLeft + "px");
+            tabsContainer.style.setProperty('--_width', newTabWidth);
+        }, 200);
+
+    }
+    // ---------------------------------------------------------------------------------------------------------------------
+    // footer inital DOM
+    const group1 = document.createElement('div');
+    group1.classList.add('group1');
+
+    // disable image drag
+    $("img").mousedown(function () {
+        return false;
     });
-}
+
+
+
+    // footer buttons group1 on the left side
+    const footerViewBtn = document.createElement('button');
+    footerViewBtn.innerHTML = '<img class="icon" src="./Icons/list.png" class="icon"></img>';
+
+    const footerSortBtn = document.createElement('button');
+    footerSortBtn.innerHTML = '<img class="icon" src="./Icons/sort.png"></img>';
+
+
+    const footerOptionsBtn = document.createElement('button');
+    footerOptionsBtn.innerHTML = '<img class="icon" src="./Icons/footer_options.png"></img>';
+
+    group1.append(footerViewBtn, footerSortBtn, footerOptionsBtn);
+
+
+    const footerNewTaskBtn = document.createElement('button');
+    footerNewTaskBtn.classList.add('new-task');
+    footerNewTaskBtn.innerHTML = `<p id="add-task">+</p>`;
+
+    footer.append(group1);
+    footer.appendChild(footerNewTaskBtn);
+
+    // modals events
+
+    footerOptionsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        showListOptionsModal();
+    })
+
+    // creating the modal
+    const modal = document.createElement('div');
+    modal.classList.add('listOpsModal');
+
+
+    function showListOptionsModal() {
+        modal.classList.add('show');
+
+        const rename = document.createElement('button');
+        rename.innerHTML = `<p>Rename list</p>`;
+        modal.appendChild(rename);
+
+        const deleteList = document.createElement('button');
+        deleteList.innerHTML = `<p>Delete list</p>`;
+        modal.appendChild(deleteList);
+
+        const deleteCompleted = document.createElement('button');
+        deleteCompleted.innerHTML = `<p>Delete all completed tasks</p>`;
+        modal.appendChild(deleteCompleted);
+
+        document.body.appendChild(modal);
+
+        const allElements = document.querySelectorAll("*:not(body):not(html)");
+        allElements.forEach(element => {
+            if (!element.classList.contains("show") && !element.closest('.show')) {
+                element.style.filter = "blur(0.7px)";
+            }
+        });
+    }
+
+    document.addEventListener('click', function (e) {
+        if (e.target !== modal && !modal.contains(e.target)) {
+            if(modal.classList.contains('show')){
+                closeModal();
+            }
+        }
+    })
+
+    function closeModal() {
+        if(modal.classList.contains('show')){
+            modal.classList.add('hide');
+            resetStyles();
+        }
+    }
+
+
+    function resetStyles() {
+        const allElements = document.querySelectorAll("*");
+        allElements.forEach(element => {
+            element.style.filter = "none";
+        })        
+        setTimeout(() => {
+            modal.classList.remove('show', 'hide');    
+            removeModalFromDOM();
+        }, 400);
+    }
+
+    function removeModalFromDOM() {
+        // Remove the modal from its parent node (assuming modal has a parent)
+        document.body.removeChild(modal);
+    }
+
+
 })
+
+
 
 

@@ -203,3 +203,15 @@ footer {
     background-color: gray;
 }
 
+.listOpsModal.hide {
+    animation: slideOut 0.2s ease-in-out forwards;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(18%);
+    }
+    to {
+        transform: translateY(120%);
+    }
+}
