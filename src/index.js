@@ -156,7 +156,7 @@ footerOptionsBtn.addEventListener('click', () => {
     showListOptionsModal();
 })
 
-
+// creating the modal
 const modal = document.createElement('div');
 modal.classList.add('listOpsModal');
 
@@ -182,13 +182,9 @@ function showListOptionsModal() {
     allElements.forEach(element => {
         if (!element.classList.contains("show") && !element.closest('.show')) {
             element.style.filter = "blur(0.7px)"; 
-            
         }
-        
     });
-
 }
-
 })
 
 

@@ -155,19 +155,33 @@ footer {
 
 /* modal styling */
 .listOpsModal {
-    position: fixed;
+    position: absolute;
     z-index: 20;
     width: 100%;    
     background-color: rgb(55 65 81);
     border-left: none;
     border-right: none;
     border-bottom: none;
-    bottom: 0;
+
     display: flex;
     flex-direction: column;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     height: 15vh;      
+    transform: translateY(0);
+    animation: slideIn 0.2s ease-in-out forwards;
+    overflow:hidden ;
+}
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(18%);
+    }
+}
+.show {
+    overflow-y: hidden;
 }
 .listOpsModal button {
     background-color: transparent;
@@ -184,3 +198,4 @@ footer {
 .listOpsModal button:active {
     background-color: gray;
 }
+
