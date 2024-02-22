@@ -178,6 +178,7 @@ footer {
 @keyframes slideIn {
     from {
         transform: translateY(100%);
+        bottom: 30px;
     }
     to {
         transform: translateY(20%);
@@ -210,8 +211,10 @@ footer {
 @keyframes slideOut {
     from {
         transform: translateY(20%);
+        bottom: 30px;
     }
     to {
         transform: translateY(120%);
+        bottom: 30px;
     }
 }
