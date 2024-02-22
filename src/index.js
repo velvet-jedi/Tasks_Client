@@ -122,6 +122,7 @@ function moveIndicator(oldTab, newTab) {
 const group1 = document.createElement('div');
 group1.classList.add('group1');
 
+// disable image drag
 $("img").mousedown(function(){
     return false;
 });
@@ -136,10 +137,10 @@ const footerSortBtn = document.createElement('button');
 footerSortBtn.innerHTML = '<img class="icon" src="./Icons/sort.png"></img>';
 
 
-const footerListOptionsBtn = document.createElement('button');
-footerListOptionsBtn.innerHTML = '<img class="icon" src="./Icons/footer_options.png"></img>';
+const footerOptionsBtn = document.createElement('button');
+footerOptionsBtn.innerHTML = '<img class="icon" src="./Icons/footer_options.png"></img>';
 
-group1.append(footerViewBtn, footerSortBtn, footerListOptionsBtn);
+group1.append(footerViewBtn, footerSortBtn, footerOptionsBtn);
 
 
 const footerNewTaskBtn = document.createElement('button');
@@ -148,6 +149,35 @@ footerNewTaskBtn.innerHTML = `<p id="add-task">+</p>`;
 
 footer.append(group1);
 footer.appendChild(footerNewTaskBtn);
+
+// modals events
+
+footerOptionsBtn.addEventListener('click', () => {
+    showListOptionsModal();
+})
+
+
+const modal = document.createElement('div');
+modal.classList.add('listOpsModal');
+
+
+function showListOptionsModal() {
+    modal.classList.add('show');
+
+    const rename = document.createElement('button');
+    rename.innerHTML = `<p>Rename list</p>`;
+    modal.appendChild(rename);
+
+    const deleteList = document.createElement('button');
+    deleteList.innerHTML = `<p>Delete list</p>`;
+    modal.appendChild(deleteList);
+
+    const deleteCompleted = document.createElement('button');
+    deleteCompleted.innerHTML = `<p>Delete all completed tasks</p>`;
+    modal.appendChild(deleteCompleted);
+    
+    document.body.appendChild(modal);
+}
 
 })
 
