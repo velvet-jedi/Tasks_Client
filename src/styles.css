@@ -240,7 +240,7 @@ footer {
     animation: anim-effect 0.5s forwards;
     content: '';
     position: absolute;
-    
+
     margin-left: -70px;
     margin-right: 0;
     width: 70px;
@@ -261,7 +261,7 @@ footer {
     }
 }
 
-.sortModal {
+.sortOpsModal {
     position: absolute;
     z-index: 20;
     width: 100%;
@@ -274,12 +274,49 @@ footer {
     flex-direction: column;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    height: 15vh;
+    height: 13vh;
     transform: translateY(0);
     animation: slideIn 0.2s ease-in-out forwards;
     overflow: hidden;
+
+    padding: 20px;
 }
 
-.sortModal.hide {
+.sortOpsModal.hide {
     animation: slideOut 0.2s ease-in-out forwards;
+}
+
+#sort-title {
+    padding-bottom: 20px;
+}
+
+.radio-custom {
+    opacity: 0;
+    position: relative;   
+}
+.radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.radio-custom-label {
+    position: relative;
+}
+
+.radio-custom + .radio-custom-label:before {
+    content: '';
+    background: transparent;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+}
+.radio-custom:checked + .radio-custom-label:before {
+    content: "\f00c";
+    font-family: 'FontAwesome';
+    color: #bbb;
 }

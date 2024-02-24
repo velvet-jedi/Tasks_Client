@@ -198,15 +198,20 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
 
         const form = `
         <form>
-            <input type="radio" id="html" name="sort_by" value="date">
-            <label for="date">Date</label><br>
-            <input type="radio" id="css" name="sort_by" value="date">
-            <label for="starred">Starred recently</label><br>
+
+            <p id="sort-title">Sort By</p>
+
+            <input id="date" class="radio-custom" type="radio" name="sort_by" value="date" checked>
+            <label class="radio-custom-label" for="date">Date</label><br>
+
+            <input id="starred" class="radio-custom" type="radio" name="sort_by" value="starred">
+            <label class="radio-custom-label" for="starred">Starred recently</label><br>
+
         </form>
         `;
 
         sortOpsModal.innerHTML = form;
-        sortOpsModal.classList.add('sortModal');
+        
         document.body.appendChild(sortOpsModal);
         
         const allElements = document.querySelectorAll("*:not(body):not(html)");
