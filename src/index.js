@@ -151,6 +151,15 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
 
     // --------------------------------- // modals events            ---------------------------------
 
+    footerViewBtn.addEventListener('click', (e) => {
+        e.stopPropagation()
+        showViewModal();
+    })
+
+    const viewModal = document.createElement('div');
+    viewModal.classList.add('viewModal');
+
+
     footerSortBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         showSortModal();
@@ -222,7 +231,40 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
         });
     }
 
-    const modals = [listOpsModal, sortOpsModal /*, ...other modals */];
+    function showViewModal() {
+        
+        viewModal.classList.add('show');
+
+        const rows = `
+            <div>
+                <button id="row1">
+                    <img src="./Icons/star_filled.png">
+                    <p>Starred</p>
+                </button>
+            </div>   
+
+            <div>
+                <button id="row2">
+                    <p></p>
+                    <p> My Tasks</p>
+                </button>
+            </div>
+
+            <div>
+                <button id="row3">
+                    <img src="./Icons/add.png">
+                    <p>Create new list</p>
+                </button>
+            </div>
+        `;
+
+        viewModal.innerHTML = rows;
+
+        document.body.appendChild(viewModal);
+
+    }
+
+    const modals = [listOpsModal, sortOpsModal, viewModal /*, ...other modals */];
 
 
     // if clicked outside the modal closeit

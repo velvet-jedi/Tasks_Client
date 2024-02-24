@@ -320,3 +320,55 @@ footer {
     font-family: 'FontAwesome';
     color: #bbb;
 }
+
+
+.viewModal {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    background-color: rgb(55 65 81);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 18vh;
+    transform: translateY(0);
+    animation: slideIn 0.2s ease-in-out forwards;
+    overflow: hidden;
+}
+
+.viewModal button {
+    background-color: transparent;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px;
+    width: 100vw;
+    border: none;
+}
+
+.viewModal p {
+    margin-left: 1rem;
+}
+
+.viewModal button:active {
+    background-color: gray;
+}
+
+.viewModal.hide {
+    animation: slideOut 0.2s ease-in-out forwards;
+}
+#row1 {
+    margin-top: 10px;
+}
+#row1, #row2, #row3 {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+}
