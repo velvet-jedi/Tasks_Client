@@ -131,13 +131,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // footer buttons group1 on the left side
     const footerViewBtn = document.createElement('button');
+    footerViewBtn.classList.add('button-effect');
     footerViewBtn.innerHTML = '<img class="icon" src="./Icons/list.png" class="icon"></img>';
 
     const footerSortBtn = document.createElement('button');
+    footerSortBtn.classList.add('button-effect');
     footerSortBtn.innerHTML = '<img class="icon" src="./Icons/sort.png"></img>';
 
 
     const footerOptionsBtn = document.createElement('button');
+    footerOptionsBtn.classList.add('button-effect');
     footerOptionsBtn.innerHTML = '<img class="icon" src="./Icons/footer_options.png"></img>';
 
     group1.append(footerViewBtn, footerSortBtn, footerOptionsBtn);
@@ -145,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const footerNewTaskBtn = document.createElement('button');
     footerNewTaskBtn.classList.add('new-task');
+    footerNewTaskBtn.classList.add('button-effect');
     footerNewTaskBtn.innerHTML = `<p id="add-task">+</p>`;
 
     footer.append(group1);
@@ -220,9 +224,24 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.removeChild(modal);
     }
 
+    $("button").on("click",function(){
+        $(this).addClass("button-click");
+      })
+      
+      $("button").on("webkitAnimationEnd",function(){
+        $(this).removeClass("button-click");
+      })
+
+
+
+
+
+
+
+
+
 
 })
-
 
 
 
