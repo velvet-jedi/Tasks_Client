@@ -1,5 +1,6 @@
 import "./styles.css";
-document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function () {         // let the DOM be loaded first
 
     // dynamic import at runtime
     const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);
@@ -7,12 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     const header = document.getElementById('header');
-    // const content = document.getElementById('content');
     const footer = document.getElementById('footer');
 
 
-
-    // header part initial DOM
     const heading = document.createElement('h1');
     heading.textContent = 'Tasks';
     header.appendChild(heading);
@@ -57,12 +55,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const tabPanels = document.querySelectorAll("[role=tabpanel]");
 
     tabsContainer.addEventListener("click", (e) => {
-
         const clickedTab = e.target.closest("button");
         const currentTab = tabsContainer.querySelector('[aria-selected="true"]');
 
-        if (!clickedTab || clickedTab === currentTab || modal.classList.contains('show')) return;
+        const isModalShown = modals.some(modal => modal.classList.contains('show'));
 
+
+        if (!clickedTab || clickedTab === currentTab || isModalShown) return;
         switchTab(clickedTab);
     });
 
@@ -72,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const oldTab = tabsContainer.querySelector('[aria-selected="true"]');
         // Get the ID of the panel
         const activePanelId = newTab.getAttribute("aria-controls");
-
         const activePanel = tabsContainer.nextElementSibling.querySelector(
             "#" + CSS.escape(activePanelId)
         );
@@ -89,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         newTab.setAttribute("aria-selected", true);
         newTab.setAttribute("tabindex", "0");
-        newTab.focus();
+        // newTab.focus();
         moveIndicator(oldTab, newTab);
     }
 
@@ -97,9 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const newTabPosition = oldTab.compareDocumentPosition(newTab);  // get the direction of movement
         //offsetWidth read-only property returns the layout width of an element as an integer.
         const newTabWidth = newTab.offsetWidth / tabsContainer.offsetWidth;
-        // console.log(tabsContainer.offsetWidth);
-        // console.log(newTab.offsetWidth);
-        // console.log(newTabWidth);
+
         let transitionWidth;
         // stretchy
         if (newTabPosition === 4) {
@@ -127,9 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return false;
     });
 
-
-
-    // footer buttons group1 on the left side
+    // footer buttons group1 
     const footerViewBtn = document.createElement('button');
     footerViewBtn.classList.add('button-effect');
     footerViewBtn.innerHTML = '<img class="icon" src="./Icons/list.png" class="icon"></img>';
@@ -137,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const footerSortBtn = document.createElement('button');
     footerSortBtn.classList.add('button-effect');
     footerSortBtn.innerHTML = '<img class="icon" src="./Icons/sort.png"></img>';
-
 
     const footerOptionsBtn = document.createElement('button');
     footerOptionsBtn.classList.add('button-effect');
@@ -154,35 +147,42 @@ document.addEventListener("DOMContentLoaded", function () {
     footer.append(group1);
     footer.appendChild(footerNewTaskBtn);
 
-    // modals events
+
+
+    // --------------------------------- // modals events            ---------------------------------
+
+    footerSortBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showSortModal();
+    })
+    // creating the sortOpsModal
+    const sortOpsModal = document.createElement('div');
+    sortOpsModal.classList.add('sortOpsModal');
 
     footerOptionsBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-
         showListOptionsModal();
     })
-
-    // creating the modal
-    const modal = document.createElement('div');
-    modal.classList.add('listOpsModal');
-
-
+    // creating the listOpsModal
+    const listOpsModal = document.createElement('div');
+    listOpsModal.classList.add('listOpsModal');
+    //  populating the listOpsModal  
     function showListOptionsModal() {
-        modal.classList.add('show');
+        listOpsModal.classList.add('show');
 
         const rename = document.createElement('button');
         rename.innerHTML = `<p>Rename list</p>`;
-        modal.appendChild(rename);
+        listOpsModal.appendChild(rename);
 
         const deleteList = document.createElement('button');
         deleteList.innerHTML = `<p>Delete list</p>`;
-        modal.appendChild(deleteList);
+        listOpsModal.appendChild(deleteList);
 
         const deleteCompleted = document.createElement('button');
         deleteCompleted.innerHTML = `<p>Delete all completed tasks</p>`;
-        modal.appendChild(deleteCompleted);
+        listOpsModal.appendChild(deleteCompleted);
 
-        document.body.appendChild(modal);
+        document.body.appendChild(listOpsModal);
 
         const allElements = document.querySelectorAll("*:not(body):not(html)");
         allElements.forEach(element => {
@@ -192,45 +192,84 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    document.addEventListener('click', function (e) {
-        if (e.target !== modal && !modal.contains(e.target)) {
-            if(modal.classList.contains('show')){
-                closeModal();
+    //  populating the sortOpsModal
+    function showSortModal() {
+        sortOpsModal.classList.add('show');
+
+        const form = `
+        <form>
+            <input type="radio" id="html" name="sort_by" value="date">
+            <label for="date">Date</label><br>
+            <input type="radio" id="css" name="sort_by" value="date">
+            <label for="starred">Starred recently</label><br>
+        </form>
+        `;
+
+        sortOpsModal.innerHTML = form;
+        sortOpsModal.classList.add('sortModal');
+        document.body.appendChild(sortOpsModal);
+        
+        const allElements = document.querySelectorAll("*:not(body):not(html)");
+        allElements.forEach(element => {
+            if (!element.classList.contains("show") && !element.closest('.show')) {
+                element.style.filter = "blur(0.7px)";
             }
+        });
+    }
+
+    const modals = [listOpsModal, sortOpsModal /*, ...other modals */];
+
+
+    // if clicked outside the modal closeit
+    document.addEventListener('click', function (e) {
+
+        const isModal = modals.some(modal => modal.contains(e.target));
+
+        if(!isModal) {
+            modals.forEach(modal => {
+                if(modal.classList.contains('show')) {
+                    closeModal(modal);
+                }
+            })
         }
     })
 
-    function closeModal() {
-        if(modal.classList.contains('show')){
+    // close modal function
+    function closeModal(modal) {
+        if (modal.classList.contains('show')) {
             modal.classList.add('hide');
-            resetStyles();
+            resetStyles(modal);
         }
     }
 
+    // reset blur and remove show/hide classes
+    function resetStyles(modal) {
 
-    function resetStyles() {
         const allElements = document.querySelectorAll("*");
         allElements.forEach(element => {
             element.style.filter = "none";
-        })        
+        })
+    
         setTimeout(() => {
-            modal.classList.remove('show', 'hide');    
-            removeModalFromDOM();
+            modal.classList.remove('show', 'hide');
+
+            removeModalFromDOM(modal);
         }, 400);
     }
 
-    function removeModalFromDOM() {
+    // remove the modal from DOM
+    function removeModalFromDOM(modal) {
         // Remove the modal from its parent node (assuming modal has a parent)
         document.body.removeChild(modal);
     }
 
-    $("button").on("click",function(){
+    $("button").on("click", function () {
         $(this).addClass("button-click");
-      })
-      
-      $("button").on("webkitAnimationEnd",function(){
+    })
+
+    $("button").on("webkitAnimationEnd", function () {
         $(this).removeClass("button-click");
-      })
+    })
 
 
 
