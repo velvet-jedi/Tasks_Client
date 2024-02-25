@@ -151,6 +151,14 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
 
     // --------------------------------- // modals events            ---------------------------------
 
+    footerNewTaskBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showNewTaskModal();
+    })
+
+    const newTaskModal = document.createElement('div');
+    newTaskModal.classList.add('newTaskModal');
+
     footerViewBtn.addEventListener('click', (e) => {
         e.stopPropagation()
         showViewModal();
@@ -264,7 +272,32 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
 
     }
 
-    const modals = [listOpsModal, sortOpsModal, viewModal /*, ...other modals */];
+    function showNewTaskModal () {
+
+        newTaskModal.classList.add('show');
+
+        const html = `
+            <div id="rowrow">
+                <input type="text" placeholder="New Task"></input>
+                <input type="text" placeholder="Add details"></input>
+                <div id="row22">
+                    <button>
+                        <img src="./Icons/clock.png">
+                    </button>
+                    
+                    <button>
+                        <img src="./Icons/star_empty.png">
+                    </button>
+                </div>
+            </div>
+        `;
+
+        newTaskModal.innerHTML = html;
+
+        document.body.appendChild(newTaskModal);
+    }
+
+    const modals = [listOpsModal, sortOpsModal, viewModal, newTaskModal];
 
 
     // if clicked outside the modal closeit

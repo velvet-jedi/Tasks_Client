@@ -372,3 +372,67 @@ footer {
     /* justify-content: center; */
     align-items: center;
 }
+
+
+.newTaskModal {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    background-color: rgb(55 65 81);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 18vh;
+    transform: translateY(0);
+    animation: slideIn 0.2s ease-in-out forwards;
+    overflow: hidden;
+}
+
+
+.newTaskModal button {
+    background-color: transparent;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px;
+    width: 100vw;
+    border: none;
+}
+
+.newTaskModal p {
+    margin-left: 1rem;
+}
+
+.newTaskModal button:active {
+    background-color: gray;
+}
+
+.newTaskModal.hide {
+    animation: slideOut 0.2s ease-in-out forwards;
+}
+#rowrow {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    justify-content: center;
+}
+#rowrow > input {
+    background-color: transparent;
+    color: #fff;
+    margin: 5px;
+    border: none;
+}
+#rowrow > input:focus {
+    border: none;
+    outline: none; /* Remove default outline */
+}
+#row22 {
+    display: flex;
+    flex-direction: row;
+    width: 10vw;
+}
