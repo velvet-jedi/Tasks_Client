@@ -1,5 +1,5 @@
 import "./styles.css";
-
+// UI script 
 document.addEventListener("DOMContentLoaded", function () {         // let the DOM be loaded first
 
     // dynamic import at runtime

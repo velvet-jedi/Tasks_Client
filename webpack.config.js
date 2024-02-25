@@ -5,9 +5,13 @@ const webpack = require("webpack");
 
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+      app:  './src/index.js',
+      data: './src/app.js'
+    },
+    
     output: {
-        filename: 'index.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'docs'),
     },
     plugins: [
