@@ -1,5 +1,6 @@
 import "./styles.css";
-import { greetFromApp, messageFromApp } from './app.js';
+import {createTask} from './app.js';
+
 
 // UI script 
 document.addEventListener("DOMContentLoaded", function () {         // let the DOM be loaded first
@@ -277,9 +278,9 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
         newTaskModal.classList.add('show');
 
         const html = `
-            <div id="rowrow">
-                <input type="text" placeholder="New Task"></input>
-                <input type="text" placeholder="Add description"></input>
+            <form id="taskForm">
+                <input type="text" name="newTaskTitle" placeholder="New Task"></input>
+                <input type="text" name="description" placeholder="Add description"></input>
                 <div id="row22">
                     <button>
                         <img src="./Icons/clock.png">
@@ -289,17 +290,27 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
                         <img src="./Icons/star_empty.png">
                     </button>
 
-                    <button type="submit">
+                    <button type="button" id="save-task">
                         Save
                     </button>
                 </div>
-            </div>
+            </form>
         `;
-
+        
         newTaskModal.innerHTML = html;
-
         document.body.appendChild(newTaskModal);
+
+        const saveTaskBtn = document.getElementById('save-task');
+
+    saveTaskBtn.addEventListener('click', ()=> {
+        const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
+        const taskDescription = document.querySelector("input[name='description']").value;
+        const taskObject = createTask(taskTitle, taskDescription);
+        console.log(taskObject);
+    });
+        
     }
+        
 
     const modals = [listOpsModal, sortOpsModal, viewModal, newTaskModal];
 
@@ -334,6 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
             element.style.filter = "none";
         })
     
+        
         setTimeout(() => {
             modal.classList.remove('show', 'hide');
 
@@ -356,9 +368,6 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
     })
 
     
-    console.log('Message from app.js:', messageFromApp);
-
-    greetFromApp();
 
 
 

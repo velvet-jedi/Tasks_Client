@@ -1,5 +1,7 @@
 // create factory function for creating tasks objects
+
 function createTask(title, description, dueDate, isStarred=false) {
+    
     return {
         title,
         description,
@@ -9,14 +11,8 @@ function createTask(title, description, dueDate, isStarred=false) {
 }
 
 
-// let task1 = createTask("task 1", "task 1 description", "2022-01-01", false); 
-// let task2 = createTask("task 2", "task 2 description"); 
-// console.log(task1);
-// console.log(task2);
-
-
 // function to createList
-function createList () {
+function createList() {
 
 }
 
@@ -30,13 +26,13 @@ const lists = [
     // other lists
 ]
 
-function orgList (list) {
+function orgList(list) {
     lists.push(list);
 
 }
 
 // function to add tasks to localstorage
-function storeTask () {
+function storeTask() {
     localStorage.setItem('lists', JSON.stringify(lists));
 }
 
@@ -47,16 +43,10 @@ const reminder = () => {
 
 
 // to check for completion of tasks
-function isComplete (task) {
+function isComplete(task) {
     return task.completed === true;
 }
 
-function greetFromApp() {
-    console.log('Hello from app.js');
-}
-
-// Variable in app.js
-const messageFromApp = 'Message from app.js';
 
 
-export { greetFromApp, messageFromApp };
+export { createTask, createList, orgList, storeTask, reminder, isComplete };
