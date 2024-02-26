@@ -1,5 +1,3 @@
-import "date-fns";
-
 // create factory function for creating tasks objects
 function createTask(title, description, dueDate, isStarred=false) {
     return {
@@ -17,19 +15,38 @@ function createTask(title, description, dueDate, isStarred=false) {
 // console.log(task2);
 
 
-// reminder function 
-const reminder = () => {
-
-    // using date-fns to calculate when to remind of upcoming duedate
+// function to createList
+function createList () {
 
 }
 
 // organize into lists 
-function orgList () {
+
+const lists = [
+    {
+        name: '',
+        tasks: [],
+    },
+    // other lists
+]
+
+function orgList (list) {
+    lists.push(list);
 
 }
 
+// function to add tasks to localstorage
+function storeTask () {
+    localStorage.setItem('lists', JSON.stringify(lists));
+}
+
+// reminder function 
+const reminder = () => {
+    // using date-fns to calculate when to remind of upcoming duedate
+}
+
+
 // to check for completion of tasks
-function isComplete () {
-    
+function isComplete (task) {
+    return task.completed === true;
 }
