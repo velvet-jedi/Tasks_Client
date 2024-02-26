@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
     const header = document.getElementById('header');
     const footer = document.getElementById('footer');
 
+    const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);
+    const images = require.context('./Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
+
 
     const heading = document.createElement('h1');
     heading.textContent = 'Tasks';
