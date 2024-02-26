@@ -2,11 +2,6 @@ import "./styles.css";
 // UI script 
 document.addEventListener("DOMContentLoaded", function () {         // let the DOM be loaded first
 
-    // dynamic import at runtime
-    const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);
-    const images = require.context('./Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
-
-
     const header = document.getElementById('header');
     const footer = document.getElementById('footer');
 
@@ -279,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
         const html = `
             <div id="rowrow">
                 <input type="text" placeholder="New Task"></input>
-                <input type="text" placeholder="Add details"></input>
+                <input type="text" placeholder="Add description"></input>
                 <div id="row22">
                     <button>
                         <img src="./Icons/clock.png">
@@ -287,6 +282,10 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
                     
                     <button>
                         <img src="./Icons/star_empty.png">
+                    </button>
+
+                    <button type="submit">
+                        Save
                     </button>
                 </div>
             </div>
@@ -355,12 +354,4 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
 
 
 
-
-
-
-
-
 })
-
-
-
