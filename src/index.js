@@ -1,4 +1,6 @@
 import "./styles.css";
+import { greetFromApp, messageFromApp } from './app.js';
+
 // UI script 
 document.addEventListener("DOMContentLoaded", function () {         // let the DOM be loaded first
 
@@ -353,7 +355,10 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
         $(this).removeClass("button-click");
     })
 
+    
+    console.log('Message from app.js:', messageFromApp);
 
+    greetFromApp();
 
 
 

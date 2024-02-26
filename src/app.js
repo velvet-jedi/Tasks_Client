@@ -50,3 +50,13 @@ const reminder = () => {
 function isComplete (task) {
     return task.completed === true;
 }
+
+function greetFromApp() {
+    console.log('Hello from app.js');
+}
+
+// Variable in app.js
+const messageFromApp = 'Message from app.js';
+
+
+export { greetFromApp, messageFromApp };
