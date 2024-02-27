@@ -1,9 +1,9 @@
 import "./styles.css";
-import {createTask} from './app.js';
+import {createTask, createList, orgList, storeTask, reminder, isComplete} from './app.js';
 
-
+var taskObject = null;
 // UI script 
-document.addEventListener("DOMContentLoaded", function () {         // let the DOM be loaded first
+    
 
     const header = document.getElementById('header');
     const footer = document.getElementById('footer');
@@ -305,12 +305,12 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
     saveTaskBtn.addEventListener('click', ()=> {
         const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
         const taskDescription = document.querySelector("input[name='description']").value;
-        const taskObject = createTask(taskTitle, taskDescription);
-        console.log(taskObject);
+        taskObject = createTask(taskTitle, taskDescription);
+        orgList(taskObject);
     });
-        
+    
     }
-        
+    
 
     const modals = [listOpsModal, sortOpsModal, viewModal, newTaskModal];
 
@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {         // let the D
     })
 
     
+    export { taskObject };
 
 
 
-})

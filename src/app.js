@@ -1,23 +1,25 @@
 // create factory function for creating tasks objects
 
-function createTask(title, description, dueDate, isStarred=false) {
-    
+
+import { taskObject } from "./index.js";
+
+function createTask(title, description, dueDate, isStarred = false) {
+
     return {
         title,
         description,
         dueDate,
         isStarred
     }
+    
 }
-
 
 // function to createList
 function createList() {
 
 }
 
-// organize into lists 
-
+// organize into lists
 const lists = [
     {
         name: '',
@@ -26,9 +28,9 @@ const lists = [
     // other lists
 ]
 
-function orgList(list) {
-    lists.push(list);
-
+function orgList(task) {
+    lists.push(task);
+    console.log(lists);
 }
 
 // function to add tasks to localstorage
