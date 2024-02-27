@@ -1,7 +1,6 @@
 import "./styles.css";
 import {createTask, createList, orgList, storeTask, reminder, isComplete} from './app.js';
 
-var taskObject = null;
 // UI script 
     
 
@@ -282,15 +281,15 @@ var taskObject = null;
                 <input type="text" name="newTaskTitle" placeholder="New Task"></input>
                 <input type="text" name="description" placeholder="Add description"></input>
                 <div id="row22">
-                    <button>
+                    <button type="button">
                         <img src="./Icons/clock.png">
                     </button>
                     
-                    <button>
+                    <button type="button">
                         <img src="./Icons/star_empty.png">
                     </button>
 
-                    <button type="button" id="save-task">
+                    <button type="reset" id="save-task">
                         Save
                     </button>
                 </div>
@@ -305,7 +304,7 @@ var taskObject = null;
     saveTaskBtn.addEventListener('click', ()=> {
         const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
         const taskDescription = document.querySelector("input[name='description']").value;
-        taskObject = createTask(taskTitle, taskDescription);
+        var taskObject = createTask(taskTitle, taskDescription);
         orgList(taskObject);
     });
     
@@ -368,7 +367,5 @@ var taskObject = null;
     })
 
     
-    export { taskObject };
-
 
 

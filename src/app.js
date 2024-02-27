@@ -1,8 +1,5 @@
 // create factory function for creating tasks objects
 
-
-import { taskObject } from "./index.js";
-
 function createTask(title, description, dueDate, isStarred = false) {
 
     return {
@@ -16,7 +13,7 @@ function createTask(title, description, dueDate, isStarred = false) {
 
 // function to createList
 function createList() {
-
+    
 }
 
 // organize into lists
