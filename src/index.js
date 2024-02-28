@@ -308,6 +308,7 @@ function showViewModal() {
 
 }
 
+var dueDate = {};
 function showDatePicker() {
     const form = `
     <div id="popupForm">
@@ -331,23 +332,21 @@ function showDatePicker() {
     document.body.appendChild(formElement);
 
     const dateForm = document.getElementById('dateForm');
+    
     dateForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const timeValue = document.getElementById('time').value;
         const dateValue = document.getElementById('date').value;
 
-        console.log('Time:', timeValue);
-        console.log('Date:', dateValue);
-
-    })
+        dueDate = {dateValue, timeValue};
+        console.log(dueDate);
+    })  
 
     const closeButton = document.getElementById('hidePopup');
     closeButton.addEventListener('click', hidePopup);
 }
-// function showPopup() {
-//     document.getElementById('popupForm').style.display = 'block';
-//   }
+
 
   function hidePopup() {
     document.getElementById('popupForm').style.display = 'none';
@@ -385,7 +384,6 @@ function showNewTaskModal() {
     dueDateBtn.addEventListener('click', showDatePicker);
 
     const closeButton = document.getElementById('hidePopup');
-    // closeButton.addEventListener('click', hidePopup);
 
     const taskForm = document.getElementById('taskForm');
     const starTaskBtn = document.getElementById('star-task');
@@ -407,7 +405,7 @@ function showNewTaskModal() {
         const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
         const taskDescription = document.querySelector("input[name='description']").value;
 
-        var taskObject = createTask(taskTitle, taskDescription, isStarred);  // create the object
+        var taskObject = createTask(taskTitle, taskDescription, isStarred, dueDate);  // create the object
     
         orgList(taskObject);
 
@@ -418,6 +416,13 @@ function showNewTaskModal() {
 
 }
 
+newTaskModal.addEventListener('click', (event) => {
+    // Handle clicks within the modal here
+    if (event.target.matches('#dateForm, #dateForm *, #popupForm')) {
+        // Prevent the global click listener from closing the modal
+        event.stopPropagation();
+    }
+});
 
 const modals = [listOpsModal, sortOpsModal, viewModal, newTaskModal];
 
@@ -427,7 +432,7 @@ document.addEventListener('click', function (e) {
 
     const isModal = modals.some(modal => modal.contains(e.target));
 
-    if (!isModal) {
+    if (!isModal && !e.target.matches('#dateForm, #dateForm *, #popupForm')) {
         modals.forEach(modal => {
             if (modal.classList.contains('show')) {
                 closeModal(modal);
