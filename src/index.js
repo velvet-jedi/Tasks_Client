@@ -65,7 +65,6 @@ function updateTabPanelOneContent() {
 
     if (starredTasks.length === 0) {
         tabPanelOne.innerHTML = emptyTabPanel_one;
-        console.log('empty starred tasks DOM of panel1')
     } else { 
         tabPanelOne.innerHTML = ''; 
 
@@ -347,22 +346,23 @@ function showNewTaskModal() {
         e.stopPropagation();    // stop the event bubbling up to the taskform on change of image html
         // Set isStarred to true on click
         isStarred = !isStarred;
-        // Update the star icon visually
-        starImg.src = isStarred ? "./Icons/star_filled.png" : "./Icons/star_empty.png";
+        // toggle the star icon visually from empty to filled
+        starImg.src = isStarred ? "./Icons/star_filled.png" : "./Icons/star_empty.png"; 
     });
 
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        
         const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
         const taskDescription = document.querySelector("input[name='description']").value;
 
-
         var taskObject = createTask(taskTitle, taskDescription, isStarred);  // create the object
-
+    
         orgList(taskObject);
 
-        taskForm.reset(); // reset the form 
         starImg.src = "./Icons/star_empty.png";     // button image defaults to empty star
+        isStarred = false;
+        taskForm.reset(); // reset the form 
     });
 
 }

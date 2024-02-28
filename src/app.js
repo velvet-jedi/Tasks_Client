@@ -39,13 +39,13 @@ const lists = [
 
 function orgList(task) {
     // organise based on isStarred value
+    
     if(task.isStarred){
         lists[0].tasks.push(task);
     }  else {
         lists[1].tasks.push(task);
     }
     updateTabPanelOneContent();
-    // console.log(lists);
 }
 
 // function to add tasks to localstorage
