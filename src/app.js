@@ -4,6 +4,7 @@
 // 2) reminder  - select date and time for due date and remind a day before
 // create factory function for creating tasks objects
 
+import {updateTabPanelOneContent} from './index'
 function createTask(title, description, /*dueDate,*/ isStarred) {
 
     return {
@@ -22,20 +23,29 @@ function createList() {
 
 // organize into lists
 const lists = [
+    // default starred tasks list
     {
         name: 'Starred',
         tasks: [],
     },
+    // default my tasks list
     {
-        name: '',
+        name: 'My Tasks',
         tasks: [],
     },
     // other lists
+    
 ]
 
 function orgList(task) {
-    lists.push(task);
-    console.log(lists);
+    // organise based on isStarred value
+    if(task.isStarred){
+        lists[0].tasks.push(task);
+    }  else {
+        lists[1].tasks.push(task);
+    }
+    updateTabPanelOneContent();
+    // console.log(lists);
 }
 
 // function to add tasks to localstorage
@@ -56,4 +66,4 @@ function isComplete(task) {
 
 
 
-export { createTask, createList, orgList, storeTask, reminder, isComplete  };
+export { createTask, createList, orgList, storeTask, reminder, isComplete, lists  };
