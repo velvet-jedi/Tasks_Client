@@ -61,22 +61,27 @@ header.insertAdjacentHTML('beforeend', panels);
 function updateTabPanelOneContent() {
     var tabPanelOne = document.getElementById('tabPanel-1');
 
-    var starred_array = lists[0].tasks;
+    var starredTasks = lists[0].tasks;
 
-    if (starred_array.length === 0) {
+    if (starredTasks.length === 0) {
         tabPanelOne.innerHTML = emptyTabPanel_one;
         console.log('empty starred tasks DOM of panel1')
     } else { 
-        console.log(starred_array[0].title)
-        tabPanelOne.innerHTML = `
-            <div id="starred_task_row">
+        tabPanelOne.innerHTML = ''; 
+
+        starredTasks.forEach((task) => {
+            const rowHtml = `
+            <div class="starred_task_row">
                 <input type="checkbox"></input>
-                <p>${starred_array[0].title}</p>
+                <p>${task.title}</p>
                 <button type="button">
                     <img id="star-img" src="./Icons/star_filled.png">
                 </button>
             </div>
-        `; 
+            `
+
+            tabPanelOne.innerHTML += rowHtml;
+        })
     };
 };
 

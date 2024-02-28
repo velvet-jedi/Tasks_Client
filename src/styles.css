@@ -436,3 +436,7 @@ footer {
     flex-direction: row;
     width: 10vw;
 }
+
+.starred_task_row {
+    display: flex;
+}
