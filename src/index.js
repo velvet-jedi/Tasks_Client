@@ -311,7 +311,7 @@ function showViewModal() {
 function showDatePicker() {
     const form = `
     <div id="popupForm">
-        <form action="">
+        <form id="dateForm" action="">
             <label for="appt"></label>
             <input type="time" id="time" name="time">
     
@@ -329,6 +329,19 @@ function showDatePicker() {
 
     // Append the formElement to the document body
     document.body.appendChild(formElement);
+
+    const dateForm = document.getElementById('dateForm');
+    dateForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const timeValue = document.getElementById('time').value;
+        const dateValue = document.getElementById('date').value;
+
+        console.log('Time:', timeValue);
+        console.log('Date:', dateValue);
+
+    })
+
     const closeButton = document.getElementById('hidePopup');
     closeButton.addEventListener('click', hidePopup);
 }
