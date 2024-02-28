@@ -277,9 +277,9 @@ import {createTask, createList, orgList, storeTask, reminder, isComplete} from '
         newTaskModal.classList.add('show');
 
         const html = `
-            <form id="taskForm">
-                <input type="text" name="newTaskTitle" placeholder="New Task"></input>
-                <input type="text" name="description" placeholder="Add description"></input>
+            <form id="taskForm" action="">
+                <input type="text" name="newTaskTitle" placeholder="New Task" required></input>
+                <input type="text" name="description" placeholder="Add description" required></input>
                 <div id="row22">
                     <button type="button">
                         <img src="./Icons/clock.png">
@@ -289,7 +289,7 @@ import {createTask, createList, orgList, storeTask, reminder, isComplete} from '
                         <img src="./Icons/star_empty.png">
                     </button>
 
-                    <button type="reset" id="save-task">
+                    <button type="submit" id="save-task">
                         Save
                     </button>
                 </div>
@@ -299,9 +299,11 @@ import {createTask, createList, orgList, storeTask, reminder, isComplete} from '
         newTaskModal.innerHTML = html;
         document.body.appendChild(newTaskModal);
 
+        const taskForm = document.getElementById('taskForm');
         const saveTaskBtn = document.getElementById('save-task');
 
-    saveTaskBtn.addEventListener('click', ()=> {
+    taskForm.addEventListener('submit', (e)=> {
+        e.preventDefault();
         const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
         const taskDescription = document.querySelector("input[name='description']").value;
         var taskObject = createTask(taskTitle, taskDescription);

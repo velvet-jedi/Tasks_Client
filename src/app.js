@@ -1,3 +1,6 @@
+// TODO                       
+// 1) starred or not? if star btn clicked attach a isStarred true prop to object
+// 2) reminder  - select date and time for due date and remind a day before
 // create factory function for creating tasks objects
 
 function createTask(title, description, dueDate, isStarred = false) {
@@ -13,7 +16,7 @@ function createTask(title, description, dueDate, isStarred = false) {
 
 // function to createList
 function createList() {
-    
+
 }
 
 // organize into lists
