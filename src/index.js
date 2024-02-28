@@ -285,8 +285,8 @@ import {createTask, createList, orgList, storeTask, reminder, isComplete} from '
                         <img src="./Icons/clock.png">
                     </button>
                     
-                    <button type="button">
-                        <img src="./Icons/star_empty.png">
+                    <button type="button" id="star-task">
+                        <img id="star-img" src="./Icons/star_empty.png">
                     </button>
 
                     <button type="submit" id="save-task">
@@ -300,14 +300,30 @@ import {createTask, createList, orgList, storeTask, reminder, isComplete} from '
         document.body.appendChild(newTaskModal);
 
         const taskForm = document.getElementById('taskForm');
-        const saveTaskBtn = document.getElementById('save-task');
+        const starTaskBtn = document.getElementById('star-task');
+
+        var isStarred = false; // default value of isStarred is false
+        const starImg = document.getElementById('star-img');
+
+        starTaskBtn.addEventListener('click', (e) => {
+            e.stopPropagation();    // stop the event bubbling up to the taskform on change of image html
+            // Set isStarred to true on click
+            isStarred = !isStarred;
+            // Update the star icon visually
+            starImg.src = isStarred ? "./Icons/star_filled.png" : "./Icons/star_empty.png";
+          });
 
     taskForm.addEventListener('submit', (e)=> {
         e.preventDefault();
         const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
         const taskDescription = document.querySelector("input[name='description']").value;
-        var taskObject = createTask(taskTitle, taskDescription);
-        orgList(taskObject);
+
+        
+        var taskObject = createTask(taskTitle, taskDescription, isStarred);  // create the object
+        
+        console.log(taskObject);
+        taskForm.reset(); // reset the form 
+        starImg.src = "./Icons/star_empty.png";
     });
     
     }

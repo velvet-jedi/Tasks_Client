@@ -1,14 +1,15 @@
 // TODO                       
 // 1) starred or not? if star btn clicked attach a isStarred true prop to object
+//    if it is starred move it in a starred list array of objects
 // 2) reminder  - select date and time for due date and remind a day before
 // create factory function for creating tasks objects
 
-function createTask(title, description, dueDate, isStarred = false) {
+function createTask(title, description, /*dueDate,*/ isStarred) {
 
     return {
         title,
         description,
-        dueDate,
+        // dueDate,
         isStarred
     }
     
@@ -21,6 +22,10 @@ function createList() {
 
 // organize into lists
 const lists = [
+    {
+        name: 'Starred',
+        tasks: [],
+    },
     {
         name: '',
         tasks: [],
@@ -51,4 +56,4 @@ function isComplete(task) {
 
 
 
-export { createTask, createList, orgList, storeTask, reminder, isComplete };
+export { createTask, createList, orgList, storeTask, reminder, isComplete  };
