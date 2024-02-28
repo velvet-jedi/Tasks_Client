@@ -1,6 +1,7 @@
 import "./styles.css";
 import { createTask, createList, orgList, storeTask, reminder, isComplete, lists } from './app.js';
 
+
 // UI script 
 
 
@@ -307,6 +308,38 @@ function showViewModal() {
 
 }
 
+function showDatePicker() {
+    const form = `
+    <div id="popupForm">
+        <form action="">
+            <label for="appt"></label>
+            <input type="time" id="time" name="time">
+    
+            <label for="appt"></label>
+            <input type="date" id="date" name="date">
+    
+            <input type="submit">
+        </form>
+        <button id="hidePopup">Close</button>
+    </div>
+    `
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = form;
+    const formElement = tempDiv;
+
+    // Append the formElement to the document body
+    document.body.appendChild(formElement);
+    const closeButton = document.getElementById('hidePopup');
+    closeButton.addEventListener('click', hidePopup);
+}
+// function showPopup() {
+//     document.getElementById('popupForm').style.display = 'block';
+//   }
+
+  function hidePopup() {
+    document.getElementById('popupForm').style.display = 'none';
+  }
+
 function showNewTaskModal() {
 
     newTaskModal.classList.add('show');
@@ -316,7 +349,7 @@ function showNewTaskModal() {
                 <input type="text" name="newTaskTitle" placeholder="New Task" required></input>
                 <input type="text" name="description" placeholder="Add description" required></input>
                 <div id="row22">
-                    <button type="button">
+                    <button type="button" id="dueDateBtn">
                         <img src="./Icons/clock.png">
                     </button>
                     
@@ -331,8 +364,15 @@ function showNewTaskModal() {
             </form>
         `;
 
+
     newTaskModal.innerHTML = html;
     document.body.appendChild(newTaskModal);
+
+    const dueDateBtn = document.getElementById('dueDateBtn');
+    dueDateBtn.addEventListener('click', showDatePicker);
+
+    const closeButton = document.getElementById('hidePopup');
+    // closeButton.addEventListener('click', hidePopup);
 
     const taskForm = document.getElementById('taskForm');
     const starTaskBtn = document.getElementById('star-task');
@@ -393,16 +433,12 @@ function closeModal(modal) {
 
 // reset blur and remove show/hide classes
 function resetStyles(modal) {
-
     const allElements = document.querySelectorAll("*");
     allElements.forEach(element => {
         element.style.filter = "none";
     })
-
-
     setTimeout(() => {
         modal.classList.remove('show', 'hide');
-
         removeModalFromDOM(modal);
     }, 400);
 }

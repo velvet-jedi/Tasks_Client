@@ -1,18 +1,17 @@
-// TODO                       
-// 1) Styling of starred section 
+
 // 2) reminder  - select date and time for due date and remind a day before
-// create factory function for creating tasks objects
+
 
 import {updateTabPanelOneContent} from './index'
-function createTask(title, description, /*dueDate,*/ isStarred) {
 
+
+function createTask(title, description, isStarred, dueDate ) {
     return {
         title,
         description,
-        // dueDate,
-        isStarred
+        isStarred,
+        dueDate,
     }
-    
 }
 
 // function to createList
@@ -62,7 +61,6 @@ const reminder = () => {
 function isComplete(task) {
     return task.completed === true;
 }
-
 
 
 export { createTask, createList, orgList, storeTask, reminder, isComplete, lists  };

@@ -446,3 +446,21 @@ footer {
     margin-bottom: 2%;
     align-items: center;
 }
+
+#popupForm {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: grey;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      color: black;
+}
+#popupForm input {
+    color: black;
+}
+#popupForm button {
+    color: black;
+}
