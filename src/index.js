@@ -71,11 +71,9 @@ function updateTabPanelOneContent() {
         starredTasks.forEach((task) => {
             const rowHtml = `
             <div class="starred_task_row">
-                <input type="checkbox"></input>
-                <p>${task.title}</p>
-                <button type="button">
-                    <img id="star-img" src="./Icons/star_filled.png">
-                </button>
+                <input type="checkbox" style="height:20px"></input>
+                <h3>${task.title}</h3>
+                <p>${task.description}</p>
             </div>
             `
 

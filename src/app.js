@@ -1,6 +1,5 @@
 // TODO                       
-// 1) starred or not? if star btn clicked attach a isStarred true prop to object
-//    if it is starred move it in a starred list array of objects
+// 1) Styling of starred section 
 // 2) reminder  - select date and time for due date and remind a day before
 // create factory function for creating tasks objects
 
