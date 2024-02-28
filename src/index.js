@@ -319,7 +319,7 @@ function showDatePicker() {
             <label for="appt"></label>
             <input type="date" id="date" name="date">
     
-            <input type="submit">
+            <button type="button" id="submitDateBtn">Submit</button>
         </form>
         <button id="hidePopup">Close</button>
     </div>
@@ -332,8 +332,10 @@ function showDatePicker() {
     document.body.appendChild(formElement);
 
     const dateForm = document.getElementById('dateForm');
+    const submitDateBtn = document.getElementById('submitDateBtn');
+
     
-    dateForm.addEventListener('submit', (e) => {
+    submitDateBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
         const timeValue = document.getElementById('time').value;
@@ -343,14 +345,19 @@ function showDatePicker() {
         console.log(dueDate);
     })  
 
-    const closeButton = document.getElementById('hidePopup');
-    closeButton.addEventListener('click', hidePopup);
-}
-
 
   function hidePopup() {
     document.getElementById('popupForm').style.display = 'none';
   }
+    const closeButton = document.getElementById('hidePopup');
+    closeButton.addEventListener('click', (e) => {
+        hidePopup();
+        e.preventDefault();
+        e.stopPropagation();
+    });
+}
+
+
 
 function showNewTaskModal() {
 
@@ -415,14 +422,6 @@ function showNewTaskModal() {
     });
 
 }
-
-newTaskModal.addEventListener('click', (event) => {
-    // Handle clicks within the modal here
-    if (event.target.matches('#dateForm, #dateForm *, #popupForm')) {
-        // Prevent the global click listener from closing the modal
-        event.stopPropagation();
-    }
-});
 
 const modals = [listOpsModal, sortOpsModal, viewModal, newTaskModal];
 
