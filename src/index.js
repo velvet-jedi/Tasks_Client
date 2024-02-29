@@ -1,5 +1,6 @@
 import "./styles.css";
-import { createTask, createList, orgList, storeTask, reminder, isComplete, lists } from './app.js';
+import { createTask, createList, orgList, storeTask, isComplete, lists } from './app.js';
+import { format } from 'date-fns';
 // UI script 
 const header = document.getElementById('header');
 const footer = document.getElementById('footer');
@@ -29,6 +30,11 @@ const tabs = `
 const emptyTabPanel_one = `
     <img src="./Icons/man-hold-star.png"></img>
     <p>Mark important tasks with a star so you can easily find them here</p>`
+
+const emptyTabPanel_two = `
+    <img src="./Icons/idle.png" height="500">
+    <p>No todos! You're kinda idle</p>
+`
 
 
 const panels = `
@@ -81,6 +87,32 @@ function updateTabPanelOneContent() {
     };
 };
 
+function updateTabPanelTwoContent() {
+    var tabPanelTwo = document.getElementById('tabPanel-2');
+
+    var myTasks = lists[1].tasks;
+
+
+    if (myTasks.length === 0) {
+        tabPanelTwo.innerHTML = emptyTabPanel_two;
+    } else { 
+        tabPanelTwo.innerHTML = ''; 
+
+        myTasks.forEach((task) => {
+            const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
+            const rowHtml = `
+            <div class="my_task_row">
+                <input type="checkbox" style="height:20px"></input>
+                <h3>${task.title}</h3>
+                <p>${task.description}</p>
+                ${dueDateHtml}
+            </div>
+            `
+
+            tabPanelTwo.innerHTML += rowHtml;
+        })
+    };
+};
 
 
 
@@ -306,18 +338,19 @@ function showViewModal() {
 
 }
 
- var dueDate; 
+var dueDate; 
 function showDatePicker() {
     
     const form = `
     <div id="popupForm">
         <form id="dateForm" action="">
-            <label for="appt"></label>
-            <input type="time" id="time" name="time">
-    
+            
             <label for="appt"></label>
             <input type="date" id="date" name="date">
     
+            <label for="appt"></label>
+            <input type="time" id="time" name="time">
+
             <button type="button" id="submitDateBtn">Submit</button>
         </form>
         <button id="hidePopup">Close</button>
@@ -411,7 +444,7 @@ function showNewTaskModal() {
         const taskDescription = document.querySelector("input[name='description']").value;
 
         var taskObject = createTask(taskTitle, taskDescription, isStarred, dueDate);  // create the object
-    
+        console.log(taskObject)
         orgList(taskObject);
 
         starImg.src = "./Icons/star_empty.png";     // button image defaults to empty star
@@ -475,4 +508,4 @@ $("button").on("webkitAnimationEnd", function () {
 
 
 
-export {updateTabPanelOneContent};
+export {updateTabPanelOneContent, updateTabPanelTwoContent};

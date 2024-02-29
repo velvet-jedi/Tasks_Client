@@ -1,7 +1,6 @@
 // TODO
-// 1) reminder  -remind a day before
 // 2) isComplete - check if task is completed move to the completed list and function to delete all completed tasks
-import {updateTabPanelOneContent} from './index'
+import {updateTabPanelOneContent, updateTabPanelTwoContent} from './index'
 
 function createTask(title, description, isStarred, dueDate ) {
     const taskObj = {
@@ -39,21 +38,18 @@ function orgList(task) {
     // organise based on isStarred value
     if(task.isStarred){
         lists[0].tasks.push(task);
+        console.log(lists[0].tasks);
+        updateTabPanelOneContent();
     }  else {
         lists[1].tasks.push(task);
-    }
-    updateTabPanelOneContent();
-    console.log(lists[0].tasks);
+        console.log(lists[1].tasks);
+        updateTabPanelTwoContent();
+    }   
 }
 
 // function to add tasks to localstorage
 function storeTask() {
     localStorage.setItem('lists', JSON.stringify(lists));
-}
-
-// reminder function 
-const reminder = () => {
-    // using date-fns to calculate when to remind of upcoming duedate
 }
 
 // to check for completion of tasks
@@ -62,4 +58,4 @@ function isComplete(task) {
 }
 
 
-export { createTask, createList, orgList, storeTask, reminder, isComplete, lists  };
+export { createTask, createList, orgList, storeTask, isComplete, lists  };
