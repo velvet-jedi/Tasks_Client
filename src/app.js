@@ -1,13 +1,19 @@
-// 2) reminder  - select date and time for due date and remind a day before
+// TODO
+// 1) reminder  -remind a day before
+// 2) isComplete - check if task is completed move to the completed list and function to delete all completed tasks
 import {updateTabPanelOneContent} from './index'
 
 function createTask(title, description, isStarred, dueDate ) {
-    return {
+    const taskObj = {
         title,
         description,
         isStarred,
-        dueDate,
+    };
+
+    if(dueDate){        // optional dueDate property
+        taskObj.dueDate = dueDate;
     }
+    return taskObj;
 }
 
 // function to createList

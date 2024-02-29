@@ -1,16 +1,11 @@
 import "./styles.css";
 import { createTask, createList, orgList, storeTask, reminder, isComplete, lists } from './app.js';
-
-
 // UI script 
-
-
 const header = document.getElementById('header');
 const footer = document.getElementById('footer');
 
-const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);
+const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);       // dynamic loading using webpack
 const images = require.context('./Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
-
 
 const heading = document.createElement('h1');
 heading.textContent = 'Tasks';
@@ -64,17 +59,20 @@ function updateTabPanelOneContent() {
 
     var starredTasks = lists[0].tasks;
 
+
     if (starredTasks.length === 0) {
         tabPanelOne.innerHTML = emptyTabPanel_one;
     } else { 
         tabPanelOne.innerHTML = ''; 
 
         starredTasks.forEach((task) => {
+            const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
             const rowHtml = `
             <div class="starred_task_row">
                 <input type="checkbox" style="height:20px"></input>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
+                ${dueDateHtml}
             </div>
             `
 
@@ -308,8 +306,9 @@ function showViewModal() {
 
 }
 
-var dueDate = {};
+ var dueDate; 
 function showDatePicker() {
+    
     const form = `
     <div id="popupForm">
         <form id="dateForm" action="">
@@ -334,7 +333,7 @@ function showDatePicker() {
     const dateForm = document.getElementById('dateForm');
     const submitDateBtn = document.getElementById('submitDateBtn');
 
-    
+       
     submitDateBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -342,7 +341,6 @@ function showDatePicker() {
         const dateValue = document.getElementById('date').value;
 
         dueDate = {dateValue, timeValue};
-        console.log(dueDate);
     })  
 
 
@@ -418,6 +416,7 @@ function showNewTaskModal() {
 
         starImg.src = "./Icons/star_empty.png";     // button image defaults to empty star
         isStarred = false;
+        dueDate = null; 
         taskForm.reset(); // reset the form 
     });
 
