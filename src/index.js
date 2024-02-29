@@ -128,6 +128,31 @@ function updateTabPanelTwoContent() {
     };
 };
 
+function updateTabPanelThreeContent() {
+    var tabPanelThree = document.getElementById('tabPanel-3');
+
+    var completedTasks = lists[2].tasks;
+
+
+    if (completedTasks.length === 0) {
+        tabPanelThree.innerHTML = emptyTabPanel_three;
+    } else {
+        tabPanelThree.innerHTML = '';
+
+        completedTasks.forEach((task) => {
+            const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
+            const rowHtml = `
+            <div class="completed_task_row">
+                <h3>${task.title}</h3>
+                <p>${task.description}</p>
+                ${dueDateHtml}
+            </div>
+            `
+
+            tabPanelThree.innerHTML += rowHtml;
+        })
+    };    
+}
 
 document.addEventListener('change', function (event) {
     const checkbox = event.target;
@@ -144,7 +169,7 @@ document.addEventListener('change', function (event) {
                 starredTask.completed = true;
                 lists[2].tasks.push(starredTask); // Move to Completed Tasks list
                 updateTabPanelOneContent(); // Update Starred panel
-                // updateTabPanelThreeContent(); // Update Completed Tasks panel
+                updateTabPanelThreeContent(); // Update Completed Tasks panel
             } else {
                 const myTaskIndex = lists[1].tasks.findIndex(task => task.id === taskId);
                 if (myTaskIndex !== -1) {
@@ -152,7 +177,7 @@ document.addEventListener('change', function (event) {
                     completedTask.completed = true;
                     lists[2].tasks.push(completedTask); // Move to Completed Tasks list
                     updateTabPanelTwoContent(); // Update My Tasks panel
-                    // updateTabPanelThreeContent(); // Update Completed Tasks panel
+                    updateTabPanelThreeContent(); // Update Completed Tasks panel
                 }
             }
 

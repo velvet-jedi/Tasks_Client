@@ -446,7 +446,14 @@ footer {
     margin-bottom: 2%;
     align-items: center;
 }
-
+.completed_task_row {
+    display: grid;
+    grid-template-columns: 1fr 4fr 2fr;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 2%;
+    align-items: center;
+}
 
 
 #popupForm {
