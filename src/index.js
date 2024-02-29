@@ -21,7 +21,12 @@ const tabs = `
     <button id="tab-2" role="tab" aria-controls="tabPanel-2" aria-selected="false" tabindex="-1">
         My Tasks
     </button>
+
     <button id="tab-3" role="tab" aria-controls="tabPanel-3" aria-selected="false" tabindex="-1">
+    Completed Tasks
+    </button>
+
+    <button id="tab-4" role="tab" aria-controls="tabPanel-4" aria-selected="false" tabindex="-1">
     <img src="./Icons/add.png">New List
     </button>
 </div>
@@ -36,6 +41,10 @@ const emptyTabPanel_two = `
     <p>No todos! You're kinda idle</p>
 `
 
+const emptyTabPanel_three = `
+    <img src="./Icons/work.png" height="400">
+    <p>Get to work and complete some tasks</p>
+`
 
 const panels = `
 <div class="tab-panels">
@@ -50,7 +59,12 @@ const panels = `
     </div>
 
     <div id="tabPanel-3" hidden role="tabpanel" aria-labelledby="tab-3" tabindex="0">
-        <p>Make it better</p>
+        <img src="./Icons/work.png" height="400">
+        <p>Get to work and complete some tasks</p>
+    </div>
+
+    <div id="tabPanel-4" hidden role="tabpanel" aria-labelledby="tab-4" tabindex="0">
+        <p>Add a new list</p>
     </div>
 </div>
 `
