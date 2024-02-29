@@ -133,22 +133,27 @@ document.addEventListener('change', function (event) {
     const checkbox = event.target;
 
     if (checkbox.matches('input[type="checkbox"]')) {
-        const taskIndex = checkbox.dataset.index;
+        const taskId = checkbox.dataset.id;
 
         if (checkbox.checked) {
-            const starredTask = lists[0].tasks.find(task => task === lists[1].tasks[taskIndex]);
 
-            if (starredTask) {
-                lists[0].tasks.splice(lists[0].tasks.indexOf(starredTask), 1);
+            const starredTaskIndex = lists[0].tasks.findIndex(task => task.id === taskId);
+
+            if (starredTaskIndex !== -1) {
+                const starredTask = lists[0].tasks.splice(starredTaskIndex, 1)[0];
+                starredTask.completed = true;
                 lists[2].tasks.push(starredTask); // Move to Completed Tasks list
                 updateTabPanelOneContent(); // Update Starred panel
                 // updateTabPanelThreeContent(); // Update Completed Tasks panel
             } else {
-                const completedTask = lists[1].tasks.splice(taskIndex, 1)[0];
-                completedTask.completed = true;
-                lists[2].tasks.push(completedTask); // Move to Completed Tasks list
-                updateTabPanelTwoContent(); // Update My Tasks panel
-                // updateTabPanelThreeContent(); // Update Completed Tasks panel
+                const myTaskIndex = lists[1].tasks.findIndex(task => task.id === taskId);
+                if (myTaskIndex !== -1) {
+                    const completedTask = lists[1].tasks.splice(myTaskIndex, 1)[0];
+                    completedTask.completed = true;
+                    lists[2].tasks.push(completedTask); // Move to Completed Tasks list
+                    updateTabPanelTwoContent(); // Update My Tasks panel
+                    // updateTabPanelThreeContent(); // Update Completed Tasks panel
+                }
             }
 
             console.log("Updated Starred List:", lists[0].tasks);
