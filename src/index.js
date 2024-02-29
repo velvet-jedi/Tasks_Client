@@ -82,8 +82,8 @@ function updateTabPanelOneContent() {
 
     if (starredTasks.length === 0) {
         tabPanelOne.innerHTML = emptyTabPanel_one;
-    } else { 
-        tabPanelOne.innerHTML = ''; 
+    } else {
+        tabPanelOne.innerHTML = '';
 
         starredTasks.forEach((task) => {
             const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
@@ -109,8 +109,8 @@ function updateTabPanelTwoContent() {
 
     if (myTasks.length === 0) {
         tabPanelTwo.innerHTML = emptyTabPanel_two;
-    } else { 
-        tabPanelTwo.innerHTML = ''; 
+    } else {
+        tabPanelTwo.innerHTML = '';
 
         myTasks.forEach((task) => {
             const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
@@ -129,6 +129,35 @@ function updateTabPanelTwoContent() {
 };
 
 
+document.addEventListener('change', function (event) {
+    const checkbox = event.target;
+
+    if (checkbox.matches('input[type="checkbox"]')) {
+        const taskIndex = checkbox.dataset.index;
+
+        if (checkbox.checked) {
+            const starredTask = lists[0].tasks.find(task => task === lists[1].tasks[taskIndex]);
+
+            if (starredTask) {
+                lists[0].tasks.splice(lists[0].tasks.indexOf(starredTask), 1);
+                lists[2].tasks.push(starredTask); // Move to Completed Tasks list
+                updateTabPanelOneContent(); // Update Starred panel
+                // updateTabPanelThreeContent(); // Update Completed Tasks panel
+            } else {
+                const completedTask = lists[1].tasks.splice(taskIndex, 1)[0];
+                completedTask.completed = true;
+                lists[2].tasks.push(completedTask); // Move to Completed Tasks list
+                updateTabPanelTwoContent(); // Update My Tasks panel
+                // updateTabPanelThreeContent(); // Update Completed Tasks panel
+            }
+
+            console.log("Updated Starred List:", lists[0].tasks);
+            console.log("Updated My Tasks List:", lists[1].tasks);
+            console.log("Updated Completed Tasks List:", lists[2].tasks);
+        }
+    }
+}
+);
 
 const tabsContainer = document.querySelector("[role=tablist]");
 const tabButtons = document.querySelectorAll("[role=tab]");
@@ -352,9 +381,9 @@ function showViewModal() {
 
 }
 
-var dueDate; 
+var dueDate;
 function showDatePicker() {
-    
+
     const form = `
     <div id="popupForm">
         <form id="dateForm" action="">
@@ -380,20 +409,20 @@ function showDatePicker() {
     const dateForm = document.getElementById('dateForm');
     const submitDateBtn = document.getElementById('submitDateBtn');
 
-       
+
     submitDateBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
         const timeValue = document.getElementById('time').value;
         const dateValue = document.getElementById('date').value;
 
-        dueDate = {dateValue, timeValue};
-    })  
+        dueDate = { dateValue, timeValue };
+    })
 
 
-  function hidePopup() {
-    document.getElementById('popupForm').style.display = 'none';
-  }
+    function hidePopup() {
+        document.getElementById('popupForm').style.display = 'none';
+    }
     const closeButton = document.getElementById('hidePopup');
     closeButton.addEventListener('click', (e) => {
         hidePopup();
@@ -448,22 +477,22 @@ function showNewTaskModal() {
         // Set isStarred to true on click
         isStarred = !isStarred;
         // toggle the star icon visually from empty to filled
-        starImg.src = isStarred ? "./Icons/star_filled.png" : "./Icons/star_empty.png"; 
+        starImg.src = isStarred ? "./Icons/star_filled.png" : "./Icons/star_empty.png";
     });
 
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const taskTitle = document.querySelector("input[name='newTaskTitle']").value;
         const taskDescription = document.querySelector("input[name='description']").value;
 
         var taskObject = createTask(taskTitle, taskDescription, isStarred, dueDate);  // create the object
-        console.log(taskObject)
+        // console.log(taskObject)
         orgList(taskObject);
 
         starImg.src = "./Icons/star_empty.png";     // button image defaults to empty star
         isStarred = false;
-        dueDate = null; 
+        dueDate = null;
         taskForm.reset(); // reset the form 
     });
 
@@ -522,4 +551,4 @@ $("button").on("webkitAnimationEnd", function () {
 
 
 
-export {updateTabPanelOneContent, updateTabPanelTwoContent};
+export { updateTabPanelOneContent, updateTabPanelTwoContent };
