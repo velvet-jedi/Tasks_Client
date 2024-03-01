@@ -1,5 +1,5 @@
 
-import {updateTabPanelOneContent, updateTabPanelTwoContent} from '../index'
+import {updateTabPanelOneContent, updateTabPanelTwoContent} from '../UI/index'
 
 // organize into lists
 const lists = [

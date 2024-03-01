@@ -5,7 +5,7 @@ const webpack = require("webpack");
 
 
 module.exports = {
-    entry: ['./src/index.js', './src/logic/app.js'],
+    entry: ['./src/UI/index.js', './src/logic/app.js'],
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'docs'),

@@ -1,161 +1,32 @@
-import "./styles.css";
-import { createList, storeTask } from './logic/app.js';
-const { createTask } = require('./logic/tasks.js');
+import "../styles.css";
+import { createList, storeTask } from '../logic/app.js';
+const { createTask } = require('../logic/tasks.js');
 
-import { lists, orgList } from './logic/list_mgmt.js';
+import { lists, orgList } from '../logic/list_mgmt.js';
+import { tabs, panels } from './tabs.js';
+import { closeModal } from './close_modals.js';
+import { updateTabPanelOneContent, updateTabPanelTwoContent, updateTabPanelThreeContent } from "./update_panels.js";
 
 // UI script 
 const header = document.getElementById('header');
 const footer = document.getElementById('footer');
 
-const icons = require.context('./Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);       // dynamic loading using webpack
-const images = require.context('./Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
+const icons = require.context('../Icons', false, /\.(png|svg|jpg|jpeg|gif)$/);       // dynamic loading using webpack
+const images = require.context('../Images', false, /\.(png|svg|jpg|jpeg|gif)$/);
 
 const heading = document.createElement('h1');
 heading.textContent = 'Tasks';
 header.appendChild(heading);
 
 // --------------------------------------------------------
-const tabs = `
-<div role="tablist" aria-labelledby="channel-name">
-    <button id="tab-1" role="tab" aria-controls="tabPanel-1" aria-selected="true" tabindex="0">
-        <img src="./Icons/star_filled.png"></img>   
-    </button>
-    <button id="tab-2" role="tab" aria-controls="tabPanel-2" aria-selected="false" tabindex="-1">
-        My Tasks
-    </button>
 
-    <button id="tab-3" role="tab" aria-controls="tabPanel-3" aria-selected="false" tabindex="-1">
-    Completed Tasks
-    </button>
-
-    <button id="tab-4" role="tab" aria-controls="tabPanel-4" aria-selected="false" tabindex="-1">
-    <img src="./Icons/add.png">New List
-    </button>
-</div>
-`
-
-const emptyTabPanel_one = `
-    <img src="./Icons/man-hold-star.png"></img>
-    <p>Mark important tasks with a star so you can easily find them here</p>`
-
-const emptyTabPanel_two = `
-    <img src="./Icons/idle.png" height="500">
-    <p>No todos! You're kinda idle</p>
-`
-
-const emptyTabPanel_three = `
-    <img src="./Icons/work.png" height="400">
-    <p>Get to work and complete some tasks</p>
-`
-
-const panels = `
-<div class="tab-panels">
-    <div id="tabPanel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
-        <img src="./Icons/man-hold-star.png"></img>
-        <p>Mark important tasks with a star so you can easily find them here</p>
-    </div>
-
-    <div id="tabPanel-2" hidden role="tabpanel" aria-labelledby="tab-2" tabindex="0">
-        <img src="./Icons/idle.png" height="500">
-        <p>No todos! You're kinda idle</p>
-    </div>
-
-    <div id="tabPanel-3" hidden role="tabpanel" aria-labelledby="tab-3" tabindex="0">
-        <img src="./Icons/work.png" height="400">
-        <p>Get to work and complete some tasks</p>
-    </div>
-
-    <div id="tabPanel-4" hidden role="tabpanel" aria-labelledby="tab-4" tabindex="0">
-        <p>Add a new list</p>
-    </div>
-</div>
-`
 
 header.insertAdjacentHTML('beforeend', tabs);
 header.insertAdjacentHTML('beforeend', panels);
 
 
 // call the populating function here
-function updateTabPanelOneContent() {
-    var tabPanelOne = document.getElementById('tabPanel-1');
 
-    var starredTasks = lists[0].tasks;
-
-
-    if (starredTasks.length === 0) {
-        tabPanelOne.innerHTML = emptyTabPanel_one;
-    } else {
-        tabPanelOne.innerHTML = '';
-
-        starredTasks.forEach((task) => {
-            const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
-            const rowHtml = `
-            <div class="starred_task_row">
-                <input type="checkbox" style="height:20px"></input>
-                <h3>${task.title}</h3>
-                <p>${task.description}</p>
-                ${dueDateHtml}
-            </div>
-            `
-
-            tabPanelOne.innerHTML += rowHtml;
-        })
-    };
-};
-
-function updateTabPanelTwoContent() {
-    var tabPanelTwo = document.getElementById('tabPanel-2');
-
-    var myTasks = lists[1].tasks;
-
-
-    if (myTasks.length === 0) {
-        tabPanelTwo.innerHTML = emptyTabPanel_two;
-    } else {
-        tabPanelTwo.innerHTML = '';
-
-        myTasks.forEach((task) => {
-            const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
-            const rowHtml = `
-            <div class="my_task_row">
-                <input type="checkbox" style="height:20px"></input>
-                <h3>${task.title}</h3>
-                <p>${task.description}</p>
-                ${dueDateHtml}
-            </div>
-            `
-
-            tabPanelTwo.innerHTML += rowHtml;
-        })
-    };
-};
-
-function updateTabPanelThreeContent() {
-    var tabPanelThree = document.getElementById('tabPanel-3');
-
-    var completedTasks = lists[2].tasks;
-
-
-    if (completedTasks.length === 0) {
-        tabPanelThree.innerHTML = emptyTabPanel_three;
-    } else {
-        tabPanelThree.innerHTML = '';
-
-        completedTasks.forEach((task) => {
-            const dueDateHtml = task.dueDate ? `<p id="dueDateP">${task.dueDate.dateValue} ${task.dueDate.timeValue}</p>` : ''; //optional duedate display
-            const rowHtml = `
-            <div class="completed_task_row">
-                <h3>${task.title}</h3>
-                <p>${task.description}</p>
-                ${dueDateHtml}
-            </div>
-            `
-
-            tabPanelThree.innerHTML += rowHtml;
-        })
-    };    
-}
 
 document.addEventListener('change', function (event) {
     const checkbox = event.target;
@@ -271,7 +142,7 @@ footerViewBtn.classList.add('button-effect');
 footerViewBtn.innerHTML = '<img class="icon" src="./Icons/list.png" class="icon"></img>';
 
 const footerSortBtn = document.createElement('button');
-footerSortBtn.classList.add('button-effect');
+footerSortBtn.classList.add('buttolistsn-effect');
 footerSortBtn.innerHTML = '<img class="icon" src="./Icons/sort.png"></img>';
 
 const footerOptionsBtn = document.createElement('button');
@@ -548,31 +419,6 @@ document.addEventListener('click', function (e) {
     }
 })
 
-// close modal function
-function closeModal(modal) {
-    if (modal.classList.contains('show')) {
-        modal.classList.add('hide');
-        resetStyles(modal);
-    }
-}
-
-// reset blur and remove show/hide classes
-function resetStyles(modal) {
-    const allElements = document.querySelectorAll("*");
-    allElements.forEach(element => {
-        element.style.filter = "none";
-    })
-    setTimeout(() => {
-        modal.classList.remove('show', 'hide');
-        removeModalFromDOM(modal);
-    }, 400);
-}
-
-// remove the modal from DOM
-function removeModalFromDOM(modal) {
-    // Remove the modal from its parent node (assuming modal has a parent)
-    document.body.removeChild(modal);
-}
 
 $("button").on("click", function () {
     $(this).addClass("button-click");
