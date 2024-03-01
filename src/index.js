@@ -1,8 +1,8 @@
 import "./styles.css";
-import { createList, storeTask } from './app.js';
-const { createTask } = require('./tasks');
+import { createList, storeTask } from './logic/app.js';
+const { createTask } = require('./logic/tasks.js');
 
-import { lists, orgList } from './list_mgmt.js';
+import { lists, orgList } from './logic/list_mgmt.js';
 
 // UI script 
 const header = document.getElementById('header');
