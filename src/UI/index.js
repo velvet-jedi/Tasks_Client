@@ -1,3 +1,9 @@
+// TODO 
+// creating lists and adding and updating additional panels
+// local storage
+// delete list, and removing panels, delete completed tasks, 
+// listviewmodal logic and UI refining
+
 import "../styles.css";
 import { createList, storeTask } from '../logic/app.js';
 const { createTask } = require('../logic/tasks.js');
@@ -18,14 +24,10 @@ const heading = document.createElement('h1');
 heading.textContent = 'Tasks';
 header.appendChild(heading);
 
-// --------------------------------------------------------
-
 
 header.insertAdjacentHTML('beforeend', tabs);
 header.insertAdjacentHTML('beforeend', panels);
 
-
-// call the populating function here
 
 
 document.addEventListener('change', function (event) {
@@ -190,10 +192,6 @@ listOpsModal.classList.add('listOpsModal');
 //  populating the listOpsModal  
 function showListOptionsModal() {
     listOpsModal.classList.add('show');
-
-    const rename = document.createElement('button');
-    rename.innerHTML = `<p>Rename list</p>`;
-    listOpsModal.appendChild(rename);
 
     const deleteList = document.createElement('button');
     deleteList.innerHTML = `<p>Delete list</p>`;
