@@ -1,6 +1,9 @@
 import "./styles.css";
-import { createTask, createList, orgList, storeTask, isComplete, lists } from './app.js';
-import { format } from 'date-fns';
+import { createList, storeTask } from './app.js';
+const { createTask } = require('./tasks');
+
+import { lists, orgList } from './list_mgmt.js';
+
 // UI script 
 const header = document.getElementById('header');
 const footer = document.getElementById('footer');
