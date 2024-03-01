@@ -18,11 +18,6 @@ const lists = [
         name: 'Completed Tasks',
         tasks: [],
     },
-    // add new lists here
-    // {
-    //     name: 'user input value',
-    //     tasks: []
-    // }
 ]
 
 function orgList(task) {

@@ -48,7 +48,8 @@ newListBtn.addEventListener('click', () => {
     listForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (validateForm()) {
-            createList();
+            var newListName = document.getElementById('listName').value;
+            createList(newListName, lists);
             hideNewListForm();
         }
     })

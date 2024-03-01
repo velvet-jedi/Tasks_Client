@@ -1,9 +1,16 @@
-
+import lists from './list_mgmt'
 
 // function to create custom Lists
-function createList() {
+function createList(new_list_name, lists) {
     // create the list and add it to the lists array get name from user input form
-    console.log('creating list')
+    
+    const newListObject = 
+    {
+        name: new_list_name,
+        tasks: [],
+    }
+    lists.push(newListObject);
+    console.log(lists);
 }
 
 
