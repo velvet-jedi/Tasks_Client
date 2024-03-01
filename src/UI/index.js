@@ -141,15 +141,13 @@ const footerViewBtn = document.createElement('button');
 footerViewBtn.classList.add('button-effect');
 footerViewBtn.innerHTML = '<img class="icon" src="./Icons/list.png" class="icon"></img>';
 
-const footerSortBtn = document.createElement('button');
-footerSortBtn.classList.add('buttolistsn-effect');
-footerSortBtn.innerHTML = '<img class="icon" src="./Icons/sort.png"></img>';
+
 
 const footerOptionsBtn = document.createElement('button');
 footerOptionsBtn.classList.add('button-effect');
 footerOptionsBtn.innerHTML = '<img class="icon" src="./Icons/footer_options.png"></img>';
 
-group1.append(footerViewBtn, footerSortBtn, footerOptionsBtn);
+group1.append(footerViewBtn, footerOptionsBtn);
 
 
 const footerNewTaskBtn = document.createElement('button');
@@ -181,13 +179,6 @@ const viewModal = document.createElement('div');
 viewModal.classList.add('viewModal');
 
 
-footerSortBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    showSortModal();
-})
-// creating the sortOpsModal
-const sortOpsModal = document.createElement('div');
-sortOpsModal.classList.add('sortOpsModal');
 
 footerOptionsBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -222,35 +213,6 @@ function showListOptionsModal() {
     });
 }
 
-//  populating the sortOpsModal
-function showSortModal() {
-    sortOpsModal.classList.add('show');
-
-    const form = `
-        <form>
-
-            <p id="sort-title">Sort By</p>
-
-            <input id="date" class="radio-custom" type="radio" name="sort_by" value="date" checked>
-            <label class="radio-custom-label" for="date">Date</label><br>
-
-            <input id="starred" class="radio-custom" type="radio" name="sort_by" value="starred">
-            <label class="radio-custom-label" for="starred">Starred recently</label><br>
-
-        </form>
-        `;
-
-    sortOpsModal.innerHTML = form;
-
-    document.body.appendChild(sortOpsModal);
-
-    const allElements = document.querySelectorAll("*:not(body):not(html)");
-    allElements.forEach(element => {
-        if (!element.classList.contains("show") && !element.closest('.show')) {
-            element.style.filter = "blur(0.7px)";
-        }
-    });
-}
 
 function showViewModal() {
 
@@ -402,7 +364,7 @@ function showNewTaskModal() {
 
 }
 
-const modals = [listOpsModal, sortOpsModal, viewModal, newTaskModal];
+const modals = [listOpsModal, viewModal, newTaskModal];
 
 
 // if clicked outside the modal closeit
