@@ -17,7 +17,12 @@ const lists = [
     {
         name: 'Completed Tasks',
         tasks: [],
-    }
+    },
+    // add new lists here
+    // {
+    //     name: 'get from user input',
+    //     tasks: []
+    // }
 ]
 
 function orgList(task) {

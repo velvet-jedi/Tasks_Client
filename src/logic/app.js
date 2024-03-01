@@ -2,6 +2,7 @@
 
 // function to create custom Lists
 function createList() {
+    // create the list and add it to the lists array 
 }
 
 

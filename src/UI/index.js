@@ -2,7 +2,7 @@
 // creating lists and adding and updating additional panels
 // local storage
 // delete list, and removing panels, delete completed tasks, 
-// listviewmodal logic and UI refining
+
 
 import "../styles.css";
 import { createList, storeTask } from '../logic/app.js';
@@ -138,18 +138,12 @@ $("img").mousedown(function () {
     return false;
 });
 
-// footer buttons group1 
-const footerViewBtn = document.createElement('button');
-footerViewBtn.classList.add('button-effect');
-footerViewBtn.innerHTML = '<img class="icon" src="./Icons/list.png" class="icon"></img>';
-
-
 
 const footerOptionsBtn = document.createElement('button');
 footerOptionsBtn.classList.add('button-effect');
 footerOptionsBtn.innerHTML = '<img class="icon" src="./Icons/footer_options.png"></img>';
 
-group1.append(footerViewBtn, footerOptionsBtn);
+group1.append(footerOptionsBtn);
 
 
 const footerNewTaskBtn = document.createElement('button');
@@ -172,13 +166,7 @@ footerNewTaskBtn.addEventListener('click', (e) => {
 const newTaskModal = document.createElement('div');
 newTaskModal.classList.add('newTaskModal');
 
-footerViewBtn.addEventListener('click', (e) => {
-    e.stopPropagation()
-    showViewModal();
-})
 
-const viewModal = document.createElement('div');
-viewModal.classList.add('viewModal');
 
 
 
@@ -212,38 +200,6 @@ function showListOptionsModal() {
 }
 
 
-function showViewModal() {
-
-    viewModal.classList.add('show');
-
-    const rows = `
-            <div>
-                <button id="row1">
-                    <img src="./Icons/star_filled.png">
-                    <p>Starred</p>
-                </button>
-            </div>   
-
-            <div>
-                <button id="row2">
-                    <p></p>
-                    <p> My Tasks</p>
-                </button>
-            </div>
-
-            <div>
-                <button id="row3">
-                    <img src="./Icons/add.png">
-                    <p>Create new list</p>
-                </button>
-            </div>
-        `;
-
-    viewModal.innerHTML = rows;
-
-    document.body.appendChild(viewModal);
-
-}
 
 var dueDate;
 function showDatePicker() {
@@ -362,7 +318,7 @@ function showNewTaskModal() {
 
 }
 
-const modals = [listOpsModal, viewModal, newTaskModal];
+const modals = [listOpsModal, newTaskModal];
 
 
 // if clicked outside the modal closeit

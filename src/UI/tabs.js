@@ -1,3 +1,5 @@
+import { createList } from "../logic/app.js";
+
 const tabs = `
 <div role="tablist" aria-labelledby="channel-name">
     <button id="tab-1" role="tab" aria-controls="tabPanel-1" aria-selected="true" tabindex="0">
@@ -16,6 +18,7 @@ const tabs = `
     </button>
 </div>
 `
+// clicking on tab-4 button I need to call createList() from app.js
 
 const emptyTabPanel_one = `
     <img src="./Icons/man-hold-star.png"></img>
