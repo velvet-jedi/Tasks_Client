@@ -28,6 +28,46 @@ header.appendChild(heading);
 header.insertAdjacentHTML('beforeend', tabs);
 header.insertAdjacentHTML('beforeend', panels);
 
+// clicking on tab-4 button I need to call createList() from app.js
+const newListBtn = document.getElementById('tab-4');
+newListBtn.addEventListener('click', () => {
+    // display input form for new list name
+    const form = `
+        <form id="newListForm">
+            <label for="listName"></label>
+            <input type="text" id="listName" name="listName" placeholder="New list name" required>
+            <button type="submit" value="Submit">Create</button>       
+        </form>
+        <button type="button" id="hideNewListForm">Close</button>
+    `
+    const listForm = document.createElement('div');
+    listForm.classList.add('listForm');
+    listForm.innerHTML = form;
+    document.body.appendChild(listForm);
+
+    listForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            createList();
+            hideNewListForm();
+        }
+    })
+
+    function hideNewListForm() {
+        document.querySelector('.listForm').style.display = 'none';
+    }
+    function validateForm() {
+        const inputField = document.getElementById('listName');
+        return inputField.checkValidity();
+    }
+    const closeButton = document.getElementById('hideNewListForm');
+    closeButton.addEventListener('click', (e) => {
+        console.log('closing form')
+        document.getElementById('newListForm').reset(); // Reset the form
+        hideNewListForm();
+    });
+    
+});
 
 
 document.addEventListener('change', function (event) {

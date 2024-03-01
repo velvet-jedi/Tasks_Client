@@ -20,7 +20,7 @@ const lists = [
     },
     // add new lists here
     // {
-    //     name: 'get from user input',
+    //     name: 'user input value',
     //     tasks: []
     // }
 ]

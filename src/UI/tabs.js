@@ -18,7 +18,7 @@ const tabs = `
     </button>
 </div>
 `
-// clicking on tab-4 button I need to call createList() from app.js
+
 
 const emptyTabPanel_one = `
     <img src="./Icons/man-hold-star.png"></img>

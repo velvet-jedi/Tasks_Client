@@ -450,3 +450,23 @@ footer {
     flex-direction: row;
     font-size: 0.5rem;
 }
+
+
+.listForm {
+    position: relative;
+    top: 15%;
+    left: 50%;
+    width: 40vw;
+    transform: translate(-50%, -50%);
+    background: grey;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    color: black;
+}
+.listForm input {
+  color: black;
+}
+.listForm button {
+  color: black;
+}

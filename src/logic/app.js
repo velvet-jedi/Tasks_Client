@@ -2,7 +2,8 @@
 
 // function to create custom Lists
 function createList() {
-    // create the list and add it to the lists array 
+    // create the list and add it to the lists array get name from user input form
+    console.log('creating list')
 }
 
 
