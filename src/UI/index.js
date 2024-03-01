@@ -1,7 +1,7 @@
 // TODO 
-// creating lists and adding and updating additional panels
-// local storage
+// creating lists and adding and updating additional panels, for switching tabs 
 // delete list, and removing panels, delete completed tasks, 
+// localstorage
 
 
 import "../styles.css";
@@ -63,7 +63,6 @@ newListBtn.addEventListener('click', () => {
     }
     const closeButton = document.getElementById('hideNewListForm');
     closeButton.addEventListener('click', (e) => {
-        console.log('closing form')
         document.getElementById('newListForm').reset(); // Reset the form
         hideNewListForm();
     });
@@ -97,10 +96,6 @@ document.addEventListener('change', function (event) {
                     updateTabPanelThreeContent(); // Update Completed Tasks panel
                 }
             }
-
-            console.log("Updated Starred List:", lists[0].tasks);
-            console.log("Updated My Tasks List:", lists[1].tasks);
-            console.log("Updated Completed Tasks List:", lists[2].tasks);
         }
     }
 }
@@ -206,10 +201,6 @@ footerNewTaskBtn.addEventListener('click', (e) => {
 
 const newTaskModal = document.createElement('div');
 newTaskModal.classList.add('newTaskModal');
-
-
-
-
 
 footerOptionsBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -348,7 +339,6 @@ function showNewTaskModal() {
         const taskDescription = document.querySelector("input[name='description']").value;
 
         var taskObject = createTask(taskTitle, taskDescription, isStarred, dueDate);  // create the object
-        // console.log(taskObject)
         orgList(taskObject);
 
         starImg.src = "./Icons/star_empty.png";     // button image defaults to empty star

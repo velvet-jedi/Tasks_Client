@@ -1,4 +1,3 @@
-import { createList } from "../logic/app.js";
 
 const tabs = `
 <div role="tablist" aria-labelledby="channel-name">
@@ -56,5 +55,8 @@ const panels = `
     </div>
 </div>
 `
+
+
+
 
 export {tabs, emptyTabPanel_one, emptyTabPanel_two, emptyTabPanel_three, panels}
