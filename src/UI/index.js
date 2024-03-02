@@ -113,6 +113,7 @@ tabsContainer.addEventListener("click", (e) => {
 
 
     if (!clickedTab || clickedTab === currentTab || isModalShown) return;
+    console.log(tabsContainer)
     switchTab(clickedTab);
 });
 
